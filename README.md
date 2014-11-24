@@ -1,4 +1,4 @@
 TPOGame
 =======
 
-App za TPO
+Tu bomo delali za našo TPO pizdarijo :)
