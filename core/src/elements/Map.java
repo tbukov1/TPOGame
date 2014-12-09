@@ -1,4 +1,5 @@
-package tpo.game;
+package elements;
+
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -12,7 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-public class TPOGame extends ApplicationAdapter implements InputProcessor {
+public class Map extends ApplicationAdapter implements InputProcessor {
 
 	public static final String title = "TPO game";
 	public static final float STEP = 1 / 60f;
