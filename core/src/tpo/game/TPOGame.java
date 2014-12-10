@@ -22,6 +22,7 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 		height = Gdx.graphics.getHeight();
 		spriteBatch = new SpriteBatch();
 		player = new Player("data/player/sprites_player_3.png");
+		player.sprite.setPosition(width/2-20, height/2-20);
 		Gdx.input.setInputProcessor(this);
 	}
 
@@ -31,7 +32,6 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 		
 		 
 		spriteBatch.begin();
-		player.sprite.setPosition(width/2-20, height/2-20);
 		player.sprite.setScale(0.5f);
 		player.sprite.draw(spriteBatch);
 		spriteBatch.end();
