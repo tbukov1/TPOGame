@@ -43,7 +43,6 @@ public class Player extends Sprite {
 		walkFrames = new TextureRegion[FRAME_COLS];
 		for (int i = 0; i < walkFrames.length; i++) {
 			walkFrames[in++] = tmp[0][i];
-			System.out.println(tmp[0][i]);
 		}
 		walkAnimation = new Animation(0.15f, walkFrames);
 	}
@@ -78,8 +77,7 @@ public class Player extends Sprite {
 	}
 
 	public void stop() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 		walkAnimation = new Animation(0.15f, walkFrames[0]);
 	}
 }
