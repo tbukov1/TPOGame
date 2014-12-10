@@ -6,33 +6,34 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import elements.Player;
 
 public class TPOGame extends ApplicationAdapter implements InputProcessor {
 
 	SpriteBatch spriteBatch;
-	TextureRegion currentFrame;
 	Player player;
 
-	float stateTime;
+	float width ,height;
 
 	@Override
 	public void create() {
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
 		spriteBatch = new SpriteBatch();
-		player = new Player(100, 100, "data/player/sprites_player_3.png");
-		stateTime = 0f;
+		player = new Player("data/player/sprites_player_3.png");
 		Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
 	public void render() {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		stateTime += Gdx.graphics.getDeltaTime();
-		currentFrame = player.currentFrame(stateTime);
+		
+		 
 		spriteBatch.begin();
-		spriteBatch.draw(currentFrame, 90, 90);
+		player.setPosition(width/2-20, height/2-20);
+		player.setScale(0.5f);
+		player.draw(spriteBatch);
 		spriteBatch.end();
 	}
 
@@ -57,19 +58,19 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-
+		spriteBatch.dispose();
 	}
 
 	@Override
 	public boolean keyDown(int keycode) {
 		if (keycode == Input.Keys.LEFT)
-			player.left();
+			player.move(1);
 		if (keycode == Input.Keys.RIGHT)
-			player.right();
+			player.move(3);
 		if (keycode == Input.Keys.UP)
-			player.up();
+			player.move(2);
 		if (keycode == Input.Keys.DOWN)
-			player.down();
+			player.move(0);
 		return false;
 	}
 

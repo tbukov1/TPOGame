@@ -1,26 +1,27 @@
 package elements;
 
+import tpo.game.AnimatedSprite;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Player extends Sprite {
+public class Player {
 
 	private static final int FRAME_COLS = 4;
 	private static final int FRAME_ROWS = 4;
 	/*
 	 * dol je 0, levo je 1, gor je 2, desno je 3
 	 */
-	private int x, y;
 	private Animation walkAnimation;
 	private Texture walkSheet;
 	private TextureRegion[] walkFrames;
 	private TextureRegion[][] tmp;
+	private AnimatedSprite sprite;
 
-	public Player(int x, int y, String potTex) {
-		super(new Texture(Gdx.files.internal(potTex)), x, y);
+	public Player(String potTex) {
 		walkSheet = new Texture(Gdx.files.internal(potTex));
 		tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS,
 				walkSheet.getHeight() / FRAME_ROWS);
@@ -32,52 +33,32 @@ public class Player extends Sprite {
 		walkFrames = new TextureRegion[1];
 		walkFrames[0] = tmp[0][0];
 		walkAnimation = new Animation(0.15f, walkFrames);
+		sprite = new AnimatedSprite(walkAnimation);
 	}
-
-	public TextureRegion currentFrame(float stateTime) {
-		return walkAnimation.getKeyFrame(stateTime, true);
-	}
-
-	public void down() {
+	
+	public void move(int dir){
 		int in = 0;
 		walkFrames = new TextureRegion[FRAME_COLS];
 		for (int i = 0; i < walkFrames.length; i++) {
-			walkFrames[in++] = tmp[0][i];
+			walkFrames[in++] = tmp[dir][i];
 		}
 		walkAnimation = new Animation(0.15f, walkFrames);
-	}
-
-	public void left() {
-		int in = 0;
-		walkFrames = new TextureRegion[FRAME_COLS];
-		for (int i = 0; i < walkFrames.length; i++) {
-			walkFrames[in++] = tmp[1][i];
-			System.out.println(tmp[1][i]);
-		}
-		walkAnimation = new Animation(0.15f, walkFrames);
-	}
-
-	public void up() {
-		int in = 0;
-		walkFrames = new TextureRegion[FRAME_COLS];
-		for (int i = 0; i < walkFrames.length; i++) {
-			walkFrames[in++] = tmp[2][i];
-			System.out.println(tmp[2][i]);
-		}
-		walkAnimation = new Animation(0.15f, walkFrames);
-	}
-
-	public void right() {
-		int in = 0;
-		walkFrames = new TextureRegion[FRAME_COLS];
-		for (int i = 0; i < walkFrames.length; i++) {
-			walkFrames[in++] = tmp[3][i];
-		}
-		walkAnimation = new Animation(0.15f, walkFrames);
+		sprite.setAnimation(walkAnimation);
 	}
 
 	public void stop() {
-		// TODO Auto-generated method stub		
 		walkAnimation = new Animation(0.15f, walkFrames[0]);
+		sprite.setAnimation(walkAnimation);
 	}
+	public void draw(Batch b){
+		sprite.draw(b);
+	}
+	public void setPosition(float x, float y){
+		sprite.setPosition(x, y);
+	}
+	public void setScale(float xy){
+		sprite.setScale(xy);
+	}
+	public float getX(){return sprite.getX();}
+	public float getY(){return sprite.getY();}
 }
