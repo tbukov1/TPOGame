@@ -49,7 +49,6 @@ public class AnimatedSprite extends Sprite {
 	}
 
 	public void setAnimation(Animation animation) {
-		time = 0;
 		this.animation = animation;
 	}
 

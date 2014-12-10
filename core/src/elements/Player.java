@@ -19,7 +19,7 @@ public class Player {
 	private Texture walkSheet;
 	private TextureRegion[] walkFrames;
 	private TextureRegion[][] tmp;
-	private AnimatedSprite sprite;
+	public AnimatedSprite sprite;
 
 	public Player(String potTex) {
 		walkSheet = new Texture(Gdx.files.internal(potTex));
@@ -50,15 +50,4 @@ public class Player {
 		walkAnimation = new Animation(0.15f, walkFrames[0]);
 		sprite.setAnimation(walkAnimation);
 	}
-	public void draw(Batch b){
-		sprite.draw(b);
-	}
-	public void setPosition(float x, float y){
-		sprite.setPosition(x, y);
-	}
-	public void setScale(float xy){
-		sprite.setScale(xy);
-	}
-	public float getX(){return sprite.getX();}
-	public float getY(){return sprite.getY();}
 }

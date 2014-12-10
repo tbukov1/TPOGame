@@ -31,9 +31,9 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 		
 		 
 		spriteBatch.begin();
-		player.setPosition(width/2-20, height/2-20);
-		player.setScale(0.5f);
-		player.draw(spriteBatch);
+		player.sprite.setPosition(width/2-20, height/2-20);
+		player.sprite.setScale(0.5f);
+		player.sprite.draw(spriteBatch);
 		spriteBatch.end();
 	}
 
