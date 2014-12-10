@@ -29,6 +29,9 @@ public class Player extends Sprite {
 		 * 0; for (int i = 0; i < FRAME_ROWS; i++) { for (int j = 0; j <
 		 * FRAME_COLS; j++) { walkFrames[index++] = tmp[i][j]; } }
 		 */
+		walkFrames = new TextureRegion[1];
+		walkFrames[0] = tmp[0][0];
+		walkAnimation = new Animation(0.15f, walkFrames);
 	}
 
 	public TextureRegion currentFrame(float stateTime) {
@@ -70,8 +73,13 @@ public class Player extends Sprite {
 		walkFrames = new TextureRegion[FRAME_COLS];
 		for (int i = 0; i < walkFrames.length; i++) {
 			walkFrames[in++] = tmp[3][i];
-			System.out.println(tmp[3][i]);
 		}
 		walkAnimation = new Animation(0.15f, walkFrames);
+	}
+
+	public void stop() {
+		// TODO Auto-generated method stub
+		
+		walkAnimation = new Animation(0.15f, walkFrames[0]);
 	}
 }
