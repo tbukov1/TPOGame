@@ -27,9 +27,14 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 		height = Gdx.graphics.getHeight();
 		
 		spriteBatch = new SpriteBatch();
+<<<<<<< HEAD
 		map = new Map("data/map/testMapa.tmx");
 		world = new World(new Vector2(0, 0), true);
 		player = new Player("data/player/sprites_player_3.png", this);
+=======
+		player = new Player("data/player/sprites_player_3.png");
+		player.sprite.setPosition(width/2-20, height/2-20);
+>>>>>>> origin/master
 		Gdx.input.setInputProcessor(this);
 	}
 
@@ -40,8 +45,13 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 		processInput();
 		map.render(); 
 		spriteBatch.begin();
+<<<<<<< HEAD
 		player.render(spriteBatch);
 		
+=======
+		player.sprite.setScale(0.5f);
+		player.sprite.draw(spriteBatch);
+>>>>>>> origin/master
 		spriteBatch.end();
 	}
 	
