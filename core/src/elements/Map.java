@@ -25,15 +25,23 @@ public class Map extends ApplicationAdapter implements InputProcessor {
 	OrthographicCamera camera;
 	TiledMapRenderer tiledMapRenderer;
 
+	public Map(String filename){
+		this.create(filename);
+	}
+	
 	@Override
 	public void create() {
+		this.create("data/map/testMapa.tmx");
+	}
+	
+	private void create(String filename){
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, w, h);
 		camera.update();
-		tiledMap = new TmxMapLoader().load("data/map/testMapa.tmx");
+		tiledMap = new TmxMapLoader().load(filename);
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor(this);
 	}
