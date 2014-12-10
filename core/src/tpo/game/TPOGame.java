@@ -38,26 +38,33 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 	public void render() {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		
-		processInput();
-		map.render(); 
+		int movement = processInput();
+		map.render();
+		map.moveCamera(movement);
 		spriteBatch.begin();
-
 		player.render(spriteBatch);
-		
-		
-
 		spriteBatch.end();
 	}
 	
-	private void processInput(){
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+	private int processInput(){
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 			player.move(1);
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+			return 1;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
 			player.move(3);
-		if (Gdx.input.isKeyPressed(Input.Keys.UP))
+			return 3;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)){
 			player.move(2);
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+			return 2;
+		}	
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
 			player.move(0);
+			return 0;
+		}
+		return -1;
+			
 	}
 	
 	@Override

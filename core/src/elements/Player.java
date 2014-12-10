@@ -50,8 +50,9 @@ public class Player {
 		 * 0; for (int i = 0; i < FRAME_ROWS; i++) { for (int j = 0; j <
 		 * FRAME_COLS; j++) { walkFrames[index++] = tmp[i][j]; } }
 		 */
-		this.x = game.width/2-20;
-		this.y = game.height/2-20;
+		
+		this.x = game.width/2;
+		this.y = game.height/2;
 		walkFrames = new TextureRegion[1];
 		walkFrames[0] = tmp[0][0];
 		walkAnimation = new Animation(0.15f, walkFrames);
@@ -60,7 +61,7 @@ public class Player {
 
 	public void render(SpriteBatch sb){
 		this.sprite.setPosition(this.x, this.y);
-		this.sprite.setScale(0.5f);
+		this.sprite.setScale(0.25f);
 		this.sprite.draw(sb);
 	}
 	
@@ -78,12 +79,12 @@ public class Player {
 	}
 	
 	public void movePos(int dir){
-		switch(dir){
+	/*	switch(dir){
 			case 0: this.y -= 1; break;
 			case 1: this.x -= 1; break;
 			case 2: this.y += 1; break;
 			case 3: this.x += 1; break;
-		}
+		}*/
 	}
 
 	public void stop() {

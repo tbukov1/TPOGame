@@ -19,11 +19,13 @@ public class Map extends ApplicationAdapter implements InputProcessor {
 	public static final float STEP = 1 / 60f;
 	public static final int width = 800;
 	public static final int height = 400;
+	public static final float moveUnit = 8.0f;
 
 	Texture img;
 	TiledMap tiledMap;
 	OrthographicCamera camera;
 	TiledMapRenderer tiledMapRenderer;
+	float camXmoved, camYmoved;
 
 	public Map(String filename){
 		this.create(filename);
@@ -37,7 +39,10 @@ public class Map extends ApplicationAdapter implements InputProcessor {
 	private void create(String filename){
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-
+		
+		camXmoved = 0;
+		camYmoved = 0;
+		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, w, h);
 		camera.update();
@@ -54,6 +59,36 @@ public class Map extends ApplicationAdapter implements InputProcessor {
 		camera.update();
 		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
+	}
+	public void moveCamera(int direction){
+		if (direction == 1){
+			if (camXmoved >= -352){
+				camera.translate(-moveUnit, 0);
+				camXmoved -= moveUnit;
+			}
+			//System.out.println(camXmoved);
+		}
+		if (direction == 3){
+			if (camXmoved <= 584){
+				camera.translate(moveUnit, 0);
+				camXmoved += moveUnit;
+			}
+			//System.out.println(camXmoved);
+		}
+		if (direction == 0){
+			if (camYmoved >= -248){
+				camera.translate(0, -moveUnit);
+				camYmoved -= moveUnit;
+			}
+		//	System.out.println(camYmoved);
+		}
+		if (direction == 2){
+			if (camYmoved <= 592){
+				camera.translate(0, moveUnit);
+				camYmoved += moveUnit;
+			}
+		//	System.out.println(camYmoved);
+		}
 	}
 
 	@Override
