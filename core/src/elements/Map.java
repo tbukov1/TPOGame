@@ -62,32 +62,32 @@ public class Map extends ApplicationAdapter implements InputProcessor {
 	}
 	public void moveCamera(int direction){
 		if (direction == 1){
-			if (camXmoved >= -352){
+			if (camXmoved >= -264){
 				camera.translate(-moveUnit, 0);
 				camXmoved -= moveUnit;
 			}
-			//System.out.println(camXmoved);
+			System.out.println(camXmoved);
 		}
 		if (direction == 3){
-			if (camXmoved <= 584){
+			if (camXmoved <= 664){
 				camera.translate(moveUnit, 0);
 				camXmoved += moveUnit;
 			}
-			//System.out.println(camXmoved);
+			System.out.println(camXmoved);
 		}
 		if (direction == 0){
-			if (camYmoved >= -248){
+			if (camYmoved >= -168){
 				camera.translate(0, -moveUnit);
 				camYmoved -= moveUnit;
 			}
-		//	System.out.println(camYmoved);
+			System.out.println(camYmoved);
 		}
 		if (direction == 2){
-			if (camYmoved <= 592){
+			if (camYmoved <= 680){
 				camera.translate(0, moveUnit);
 				camYmoved += moveUnit;
 			}
-		//	System.out.println(camYmoved);
+			System.out.println(camYmoved);
 		}
 	}
 

@@ -60,7 +60,7 @@ public class Player {
 	}
 
 	public void render(SpriteBatch sb){
-		this.sprite.setPosition(this.x, this.y);
+		this.sprite.setCenter(this.x, this.y);
 		this.sprite.setScale(0.25f);
 		this.sprite.draw(sb);
 	}
