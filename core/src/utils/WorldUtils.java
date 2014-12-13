@@ -22,7 +22,7 @@ public class WorldUtils {
 		Body body = world.createBody(bd);
 		
 		PolygonShape pgo = new PolygonShape();// tole nekak zamenat al kwa nevem
-		pgo.setAsBox(25/2,2/2);
+		pgo.setAsBox(50/2,50/2);
 		body.createFixture(pgo, Constants.GROUND_DENSITY);
 		pgo.dispose();
 		return body;
