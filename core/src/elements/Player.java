@@ -17,7 +17,6 @@ public class Player extends AnimatedSprite{
 	private Texture walkSheet;
 	private TextureRegion[] walkFrames;
 	private TextureRegion[][] tmp;
-	public AnimatedSprite sprite;
 
 	public Player(Body body,String potTex) {		
 		super(body);
