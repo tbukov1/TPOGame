@@ -1,7 +1,7 @@
 package elements;
 
-import tpo.game.AnimatedSprite;
 import tpo.game.TPOGame;
+import utils.AnimatedSprite;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Player {
+public class Player{
 
 	private static final int FRAME_COLS = 4;
 	private static final int FRAME_ROWS = 4;
