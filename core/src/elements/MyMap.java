@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -20,12 +21,10 @@ public class MyMap extends ApplicationAdapter implements InputProcessor {
 	public static final int height = 400;
 	public static final float moveUnit = 8.0f;
 
-<<<<<<< HEAD:core/src/elements/MyMap.java
+
 	Texture img;
 	public TiledMap tiledMap;
-=======
-	TiledMap tiledMap;
->>>>>>> origin/master:core/src/elements/Map.java
+
 	OrthographicCamera camera;
 	TiledMapRenderer tiledMapRenderer;
 	float camXmoved, camYmoved;

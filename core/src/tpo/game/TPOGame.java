@@ -1,5 +1,7 @@
 package tpo.game;
 
+import utils.MapBodyManager;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -12,7 +14,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
-import elements.MapBodyManager;
 import elements.MyMap;
 import elements.Player;
 

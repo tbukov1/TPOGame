@@ -1,4 +1,4 @@
-package elements;
+package utils;
 
 import java.util.Iterator;
 
@@ -95,12 +95,12 @@ public class MapBodyManager {
 	 * @param map map to be used to create the static bodies. 
 	 * @param layerName name of the layer that contains the shapes.
 	 */
-	public void createPhysics(Map map, String layerName) {
+	public Body createPhysics(Map map, String layerName) {
 		MapLayer layer = map.getLayers().get(layerName);
 		
 		if (layer == null) {
 			logger.error("layer " + layerName + " does not exist");
-			return;
+			return null;
 		}
 		
 		MapObjects objects = layer.getObjects();
@@ -154,7 +154,9 @@ public class MapBodyManager {
 			
 			fixtureDef.shape = null;
 			shape.dispose();
+			return body;
 		}
+		return null;
 	}
 	
 	/**
