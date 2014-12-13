@@ -13,21 +13,21 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-public class Map extends ApplicationAdapter implements InputProcessor {
+public class MyMap extends ApplicationAdapter implements InputProcessor {
 
 	public static final String title = "TPO game";
-	public static final float STEP = 1 / 60f;
+	
 	public static final int width = 800;
 	public static final int height = 400;
 	public static final float moveUnit = 8.0f;
 
 	Texture img;
-	TiledMap tiledMap;
+	public TiledMap tiledMap;
 	OrthographicCamera camera;
 	TiledMapRenderer tiledMapRenderer;
 	float camXmoved, camYmoved;
 
-	public Map(String filename){
+	public MyMap(String filename){
 		this.create(filename);
 	}
 	

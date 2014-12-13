@@ -7,18 +7,24 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
-import elements.Map;
+import elements.MapBodyManager;
+import elements.MyMap;
 import elements.Player;
 
 public class TPOGame extends ApplicationAdapter implements InputProcessor {
-
+	public static final float STEP = 1 / 60f;
+	
 	SpriteBatch spriteBatch;
 	Player player;
-	Map map; 
+	MyMap map; 
 	public float width ,height;
 	World world;
+	MapBodyManager mapBodyManager;
 	
 	
 	@Override
@@ -28,9 +34,15 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 		
 		spriteBatch = new SpriteBatch();
 
-		map = new Map("data/map/testMapa.tmx");
+		map = new MyMap("data/map/testMapa.tmx");
 		world = new World(new Vector2(0, 0), true);
 		player = new Player("data/player/sprites_player_3.png", this);
+	    mapBodyManager = new MapBodyManager(world, 1.0f, Gdx.files.internal("data/map/materials.json"), 0);
+		mapBodyManager.createPhysics(map.tiledMap, "okvir");
+		
+		
+
+		
 		Gdx.input.setInputProcessor(this);
 	}
 
@@ -38,12 +50,23 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 	public void render() {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		
+		mapBodyManager.createPhysics(map.tiledMap, "okvir");
+		
 		int movement = processInput();
-		map.render();
-		map.moveCamera(movement);
+//		map.render();
+//		map.moveCamera(movement);
+		
+		BodyDef bdef = new BodyDef();
+		bdef.position.x = player.x;
+		bdef.position.y = player.y;
+		Body body = world.createBody(bdef);
+		body.createFixture(player.shape, 0f);
+		
 		spriteBatch.begin();
 		player.render(spriteBatch);
 		spriteBatch.end();
+		world.step(STEP, 1, 1);
+		
 	}
 	
 	private int processInput(){
@@ -88,6 +111,7 @@ public class TPOGame extends ApplicationAdapter implements InputProcessor {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		mapBodyManager.destroyPhysics();
 		spriteBatch.dispose();
 	}
 
