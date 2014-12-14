@@ -1,14 +1,21 @@
 package tpo.game;
 
-import com.badlogic.gdx.Game;
 import screens.GameScreen;
+import screens.MainMenu;
+
+import com.badlogic.gdx.Game;
 
 public class TPOGame2 extends Game {
-
+	MainMenu mainMenuScreen;
+	public GameScreen gameScreen;
+	
 	@Override
 	public void create() {
 		// TODO Auto-generated method stub
-		setScreen(new GameScreen());
+		mainMenuScreen = new MainMenu(this);
+		gameScreen = new GameScreen(this);
+		
+		setScreen(mainMenuScreen);
 	}
 
 }

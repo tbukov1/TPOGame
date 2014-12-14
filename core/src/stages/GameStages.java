@@ -67,6 +67,7 @@ public class GameStages extends Stage{
 			accumulator -= timeStep;
 			
 		}
+		player.update(delta);
 	}
 	
 	private void createPlayer(String tex){

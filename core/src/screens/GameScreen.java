@@ -1,6 +1,7 @@
 package screens;
 
 import stages.GameStages;
+import tpo.game.TPOGame2;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -9,12 +10,16 @@ import com.badlogic.gdx.graphics.GL20;
 public class GameScreen implements Screen{
 	
 	GameStages stage;
+	TPOGame2 game;
 	
+	public GameScreen(TPOGame2 game){
+		this.game = game;
+		stage = new GameStages();
+	}
 	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		stage = new GameStages();
 	}
 
 	@Override

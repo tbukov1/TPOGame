@@ -1,4 +1,6 @@
 package utils;
+import sun.security.util.Length;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -19,6 +21,7 @@ public class AnimatedSprite{
 	}
 	
 	public void setAnimation(TextureRegion[] reg, float df){
+		System.out.println(reg.length);
 		animation.setFrame(reg, df);
 		width = reg[0].getRegionWidth();
 		height = reg[0].getRegionHeight();
