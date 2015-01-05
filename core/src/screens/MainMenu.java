@@ -59,7 +59,7 @@ public class MainMenu implements Screen {
 		TextButtonStyle tBSyle = new TextButtonStyle();
 		tBSyle.up = skin.newDrawable("clear", Color.DARK_GRAY);
 		tBSyle.down = skin.newDrawable("blue", Color.DARK_GRAY);
-		tBSyle.checked = skin.newDrawable("blue", Color.BLUE);
+		tBSyle.checked = skin.newDrawable("clear", Color.BLUE);
 		tBSyle.over = skin.newDrawable("blue", Color.BLUE);
 
 		tBSyle.font = skin.getFont("default");
@@ -77,6 +77,7 @@ public class MainMenu implements Screen {
 			prev = tmp;
 		}
 
+
 		/*
 		 * textButton = new TextButton("PLAY",tBSyle);
 		 * textButton.setPosition(Constants.APP_WIDTH/2-textButton.getWidth()/2,
@@ -93,6 +94,8 @@ public class MainMenu implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
+
+		Gdx.input.setInputProcessor(stage);
 		for (TextButton button : buttonArray) {
 			final String tex = button.getText().toString();
 			button.addListener(new ClickListener() {
@@ -102,6 +105,8 @@ public class MainMenu implements Screen {
 					if (tex.equals("Play")) {
 						System.out.println("Open game!");
 						game.setScreen(game.gameScreen);
+						Gdx.input.setInputProcessor(null);
+						cam = null;
 					}
 					if (tex.equals("Quit")) {
 						System.out.println("Close game!");
@@ -113,8 +118,6 @@ public class MainMenu implements Screen {
 				}
 			});
 		}
-
-		Gdx.input.setInputProcessor(stage);
 	}
 
 	@Override
@@ -156,7 +159,6 @@ public class MainMenu implements Screen {
 		// TODO Auto-generated method stub
 		stage.dispose();
 		skin.dispose();
-
 	}
 
 }

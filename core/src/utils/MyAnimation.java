@@ -6,7 +6,7 @@ public class MyAnimation {
 	
 	TextureRegion[] frame;
 	float time, delay;
-	int currentFrame;
+	public int currentFrame;
 	
 	public MyAnimation(){}
 	
@@ -21,8 +21,8 @@ public class MyAnimation {
 		// TODO Auto-generated method stub
 		frame = res;
 		delay = delay2;
-		time = 0;
-		currentFrame = 0;
+//		time = 0;
+//		currentFrame = 0;
 	}
 	
 	public void update(float df){

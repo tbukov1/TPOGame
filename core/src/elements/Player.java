@@ -5,21 +5,25 @@ import utils.AnimatedSprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public class Player extends AnimatedSprite{
 
 	private static final int FRAME_COLS = 4;
 	private static final int FRAME_ROWS = 4;
+	public static final float moveUnit = 5f;
 	/*
 	 * dol je 0, levo je 1, gor je 2, desno je 3
 	 */
 	private Texture walkSheet;
 	private TextureRegion[] walkFrames;
 	private TextureRegion[][] tmp;
+	Body body;
 
 	public Player(Body body,String potTex) {		
 		super(body);
+		this.body = body;
 		walkSheet = new Texture(Gdx.files.internal(potTex));
 		tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS,
 				walkSheet.getHeight() / FRAME_ROWS);
@@ -41,18 +45,23 @@ public class Player extends AnimatedSprite{
 	}
 	
 	public void movePos(int dir){
-	/*	switch(dir){
-			case 0: this.y -= 1; break;
-			case 1: this.x -= 1; break;
-			case 2: this.y += 1; break;
-			case 3: this.x += 1; break;
-		}*/
+		Vector2 pos = body.getPosition();
+		float x = pos.x;
+		float y = pos.y;
+		switch(dir){
+			case 0: y -= moveUnit; break;
+			case 1: x -= moveUnit; break;
+			case 2: y += moveUnit; break;
+			case 3: x += moveUnit; break;
+		}
+		body.setTransform(new Vector2(x, y), body.getAngle());
 	}
 
 	public void stop() {
 		TextureRegion tmp = walkFrames[0];
 		walkFrames = new TextureRegion[1];
 		walkFrames[0] = tmp;
+		animation.currentFrame = 0;
 		setAnimation(walkFrames,1/12f);
 	}
 }

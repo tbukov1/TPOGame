@@ -1,17 +1,11 @@
 package utils;
-import sun.security.util.Length;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public class AnimatedSprite{
-	MyAnimation animation;
+	public MyAnimation animation;
 	float width, height;
 	Body body;
 	
@@ -21,7 +15,6 @@ public class AnimatedSprite{
 	}
 	
 	public void setAnimation(TextureRegion[] reg, float df){
-		System.out.println(reg.length);
 		animation.setFrame(reg, df);
 		width = reg[0].getRegionWidth();
 		height = reg[0].getRegionHeight();
@@ -32,6 +25,7 @@ public class AnimatedSprite{
 	}
 	
 	public void render(SpriteBatch sb){
+		sb.setProjectionMatrix(Camera.getCamera().combined);
 		sb.begin();
 		sb.draw(animation.getFrame(), body.getPosition().x - width/2, body.getPosition().y - height/2);
 		sb.end();
