@@ -10,21 +10,17 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import elements.Player;
 import elements.MyMap;
+import elements.Player;
 
 public class GameStages extends Stage implements InputProcessor {
 	private World world;
@@ -58,7 +54,7 @@ public class GameStages extends Stage implements InputProcessor {
 
 	private void setupCamera() {
 		// TODO Auto-generated method stub
-		OrthographicCamera tmp = new OrthographicCamera(600,300);
+		OrthographicCamera tmp = new OrthographicCamera(300,150);
 //		tmp.position.set(tmp.viewportWidth / 2,
 //				tmp.viewportHeight / 2, 0f);
 //		tmp.update();
@@ -88,11 +84,11 @@ public class GameStages extends Stage implements InputProcessor {
 		bdef.type = BodyType.DynamicBody;
 		Body body = world.createBody(bdef);
 
-		shape.setAsBox(50,	50);
+		shape.setAsBox(10,	10);
 		fdef.shape = shape;
 		body.createFixture(fdef).setUserData("player");
 
-		player = new Player(body, tex);
+		player = new Player(body, tex, 0.17f, 0.17f);
 		body.setUserData(player);
 	}
 

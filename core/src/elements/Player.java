@@ -21,8 +21,8 @@ public class Player extends AnimatedSprite{
 	private TextureRegion[][] tmp;
 	Body body;
 
-	public Player(Body body,String potTex) {		
-		super(body);
+	public Player(Body body,String potTex, float scaleX, float scaleY ) {		
+		super(body,scaleX, scaleY);
 		this.body = body;
 		walkSheet = new Texture(Gdx.files.internal(potTex));
 		tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS,

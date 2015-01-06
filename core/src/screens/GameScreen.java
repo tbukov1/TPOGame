@@ -26,6 +26,8 @@ public class GameScreen implements Screen{
 	public void render(float delta) {
 		// TODO Auto-generated method stub
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		//nekam shranmo ker state je in pol glede tega stata rišemo al špilo al pa question
 		stage.draw();
 		stage.act(delta);
 		
