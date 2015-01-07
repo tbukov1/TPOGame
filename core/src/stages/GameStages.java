@@ -1,6 +1,8 @@
 package stages;
 
+import tpo.game.TPOGame2;
 import utils.Camera;
+import utils.GameStates;
 import utils.MapBodyManager;
 import utils.WorldUtils;
 
@@ -28,6 +30,10 @@ public class GameStages extends Stage implements InputProcessor {
 	private SpriteBatch sb;
 	private BodyDef groundDef;
 	private MyMap map;
+	TPOGame2 game;	
+	
+	float startX = 600;
+	float startY = 500;
 
 	float timeStep = 1 / 60f;
 	float accumulator = 0f;
@@ -38,8 +44,8 @@ public class GameStages extends Stage implements InputProcessor {
 
 	Player player;
 
-	public GameStages() {
-		setupCamera();
+	public GameStages(TPOGame2 game) {
+		setupCamera(startX,startY);
 		sb = new SpriteBatch();
 		mbm = new MapBodyManager(world, 10, new FileHandle(
 				"data/map/materials.json"), 0);
@@ -49,15 +55,15 @@ public class GameStages extends Stage implements InputProcessor {
 		// world.createBody(groundDef);
 		renderer = new Box2DDebugRenderer();
 		Gdx.input.setInputProcessor(this);
-		createPlayer("data/player/sprites_player_3.png");
+		createPlayer("data/player/sprites_player_3.png",startX,startY);
+		this.game = game;
 	}
 
-	private void setupCamera() {
+	private void setupCamera(float x, float y) {
 		// TODO Auto-generated method stub
 		OrthographicCamera tmp = new OrthographicCamera(300,150);
-//		tmp.position.set(tmp.viewportWidth / 2,
-//				tmp.viewportHeight / 2, 0f);
-//		tmp.update();
+		tmp.position.set(x,
+				y, 0f);
 		Camera proba = new Camera(tmp);
 		camera = Camera.getCamera();
 	}
@@ -70,17 +76,16 @@ public class GameStages extends Stage implements InputProcessor {
 		while (accumulator >= delta) {
 			world.step(timeStep, 6, 2);
 			accumulator -= timeStep;
-
 		}
 		player.update(delta);
 	}
 
-	private void createPlayer(String tex) {
+	private void createPlayer(String tex, float x, float y) {
 		BodyDef bdef = new BodyDef();
 		FixtureDef fdef = new FixtureDef();
 		PolygonShape shape = new PolygonShape();
 
-		bdef.position.set(0,0);
+		bdef.position.set(x,y);
 		bdef.type = BodyType.DynamicBody;
 		Body body = world.createBody(bdef);
 
@@ -126,6 +131,8 @@ public class GameStages extends Stage implements InputProcessor {
 			player.move(0);
 			return 0;
 		}
+		if(Gdx.input.isKeyPressed(Input.Keys.Q))
+			game.state = GameStates.QUESTION;
 		return -1;
 	}
 

@@ -17,7 +17,7 @@ public class MyMap{
 	
 //	public static final int width = 800;
 //	public static final int height = 400;
-	public static final float moveUnit = 5.0f;
+	public static final float moveUnit = 3.0f;
 
 
 	Texture img;

@@ -12,7 +12,7 @@ public class Player extends AnimatedSprite{
 
 	private static final int FRAME_COLS = 4;
 	private static final int FRAME_ROWS = 4;
-	public static final float moveUnit = 5f;
+	public static final float moveUnit = 3f;
 	/*
 	 * dol je 0, levo je 1, gor je 2, desno je 3
 	 */
