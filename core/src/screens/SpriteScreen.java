@@ -85,6 +85,9 @@ public class SpriteScreen implements Screen{
 		if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
 			game.setScreen(game.mainMenuScreen);
 		}
+		if(Gdx.input.isTouched()){
+			game.setScreen(game.mainMenuScreen);
+		}
 			
 	}
 

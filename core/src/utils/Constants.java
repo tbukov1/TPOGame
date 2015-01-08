@@ -6,7 +6,14 @@ public class Constants {
 	public static final int APP_WIDTH = 800;
 	public static final int APP_HEIGHT = 400;
 	
-	public static final Vector2 WORLD_G = new Vector2();
+	public static final Vector2 WORLD_G = new Vector2(0,0);
 	public static final Vector2 GROUND_POS = new Vector2(0,0);
 	public static final float GROUND_DENSITY = 0f;
+	
+	public static final int DESERT = 0;
+	public static final int FOREST = 1;
+	public static final int SNOW = 2;
+	public static final int CAVE = 3;
+	
+	public static final String[] MAP_NAMES = {"data/map/desert2.tmx", "data/map/forest2.tmx", "data/map/snow2.tmx", "data/map/cave2.tmx"};
 }
