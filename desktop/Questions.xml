@@ -16,10 +16,10 @@
   	    <Question number="1">
   	        <Text>E=mc^2?</Text>
   	        <Answers>
-  	            <Answer type="correct">Yes it is.</Answer>
+  	            <Answer>Yes it is.</Answer>
   	            <Answer>This is Lama</Answer>
   	            <Answer>Is this lame?</Answer>
-  	            <Answer>This is lame</Answer>
+  	            <Answer type="correct">This is lameCorrect</Answer>
   	        </Answers>  	        
   	    </Question>
   	</Class>
@@ -30,15 +30,15 @@
   	            <Answer type="correct">Yes it is.</Answer>
   	            <Answer>This is Lama</Answer>
   	            <Answer>Is this lame?</Answer>
-  	            <Answer>This is lame</Answer>
+  	            <!-- <Answer>This is lame</Answer> -->
   	        </Answers>  	        
   	    </Question>
   	    <Question number="2">
   	        <Text>Cherry berry?</Text>
   	        <Answers>
-  	            <Answer type="correct">Yes it is.</Answer>
+  	            <Answer>Yes it is.</Answer>
   	            <Answer>This is Lama</Answer>
-  	            <Answer>Is this lame?</Answer>
+  	            <Answer type="correct">Is this lame?Correct</Answer>
   	            <Answer>This is lame</Answer>
   	        </Answers>  	        
   	    </Question>

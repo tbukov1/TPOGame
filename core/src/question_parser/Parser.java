@@ -28,7 +28,7 @@ public class Parser {
 			Element root = doc.getDocumentElement();
 			Node tempnode = root;
 
-			NodeList nodeList = root.getChildNodes();
+			NodeList nodeList = doc.getChildNodes();
 			
 			for(int i = 0; i < nodeList.getLength(); i++){
 				Node node = nodeList.item(i);
@@ -49,23 +49,27 @@ public class Parser {
 				Node node = nodeList.item(i);
 				if(node instanceof Element){
 					Question que = new Question();
-					que.id = node.getAttributes().getNamedItem("number").getNodeValue();
+//					que.id = node.getAttributes().getNamedItem("number").getNodeValue();
 					que.text = node.getFirstChild().getNodeValue();
 					
 					nodeListAnswers = node.getChildNodes();
-					que.answer1 = nodeListAnswers.item(0).getNodeValue();
-					que.answer2 = nodeListAnswers.item(1).getNodeValue();
-					que.answer3 = nodeListAnswers.item(2).getNodeValue();
-					que.answer4 = nodeListAnswers.item(3).getNodeValue();
+//					que.answer1 = nodeListAnswers.item(0).getNodeValue();
+//					que.answer2 = nodeListAnswers.item(1).getNodeValue();
+//					que.answer3 = nodeListAnswers.item(2).getNodeValue();
+//					que.answer4 = nodeListAnswers.item(3).getNodeValue();
 					
+					String[] answers = new String[nodeListAnswers.getLength()];
 					for(int j = 0; j < nodeListAnswers.getLength(); j++){
-						Node nodeAnswer = nodeList.item(i);						
+						Node nodeAnswer = nodeList.item(i);
+						answers[i] = nodeListAnswers.item(i).getNodeValue(); 
 						if(nodeAnswer instanceof Element){
 							if(nodeAnswer.getAttributes() != null){
-								que.correctAnswer = nodeAnswer.getNodeValue();								
+//								que.correctAnswer = nodeAnswer.getNodeValue();	
+								que.correctAnswer = i;
 							}
 						}
 					}
+					que.answers = answers;
 					
 					questions.add(que);
 					

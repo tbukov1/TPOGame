@@ -2,6 +2,9 @@ package screens;
 
 import java.util.ArrayList;
 
+import question_parser.Parser;
+import question_parser.Question;
+
 import stages.GameStages;
 import stages.QuestionStage;
 import tpo.game.TPOGame2;
@@ -70,6 +73,11 @@ public class GameScreen implements Screen{
 			stage.act(delta);
 		}
 		else if(game.state == GameStates.QUESTION){
+			Parser p = new Parser();
+			ArrayList<Question> question = p.getQuestion("Questions.xml", Constants.SUBJECT_QUESTION[1], 0);
+			for (Question question2 : question) {
+				System.out.println(question2);
+			}
 			qStage.setAll("A to sploh kej dela?",new String[]{"Da","Ne","Nevem","Mogoèe"},1);
 			if(qStageFirst){
 				Gdx.input.setInputProcessor(qStage);
