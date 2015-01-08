@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Classes>
+  	<Class type="english">
+  	    <Question number="1">
+  	        <Text>This is a test question?</Text>
+  	        <Answers>
+  	            <Answer type="correct">Yes it is.</Answer>
+  	            <Answer>This is Lama</Answer>
+  	            <Answer>Is this lame?</Answer>
+  	            <Answer>This is lame</Answer>
+  	        </Answers>  	        
+  	    </Question>
+  	</Class>
+  	<Class type="math">
+  	    <Question number="1">
+  	        <Text>E=mc^2?</Text>
+  	        <Answers>
+  	            <Answer type="correct">Yes it is.</Answer>
+  	            <Answer>This is Lama</Answer>
+  	            <Answer>Is this lame?</Answer>
+  	            <Answer>This is lame</Answer>
+  	        </Answers>  	        
+  	    </Question>
+  	</Class>
+  	<Class type="chemistry">
+  	    <Question number="1">
+  	        <Text>Lolipop?</Text>
+  	        <Answers>
+  	            <Answer type="correct">Yes it is.</Answer>
+  	            <Answer>This is Lama</Answer>
+  	            <Answer>Is this lame?</Answer>
+  	            <Answer>This is lame</Answer>
+  	        </Answers>  	        
+  	    </Question>
+  	    <Question number="2">
+  	        <Text>Cherry berry?</Text>
+  	        <Answers>
+  	            <Answer type="correct">Yes it is.</Answer>
+  	            <Answer>This is Lama</Answer>
+  	            <Answer>Is this lame?</Answer>
+  	            <Answer>This is lame</Answer>
+  	        </Answers>  	        
+  	    </Question>
+	</Class>
+</Classes>
