@@ -12,7 +12,7 @@ public class Player extends AnimatedSprite{
 
 	private static final int FRAME_COLS = 4;
 	private static final int FRAME_ROWS = 4;
-	public static final float moveUnit = 5f;
+	public static final float moveUnit = 3f;
 	/*
 	 * dol je 0, levo je 1, gor je 2, desno je 3
 	 */
@@ -20,6 +20,7 @@ public class Player extends AnimatedSprite{
 	private TextureRegion[] walkFrames;
 	private TextureRegion[][] tmp;
 	Body body;
+	private boolean moving;
 
 	public Player(Body body,String potTex, float scaleX, float scaleY ) {		
 		super(body,scaleX, scaleY);
@@ -30,6 +31,7 @@ public class Player extends AnimatedSprite{
 		walkFrames = new TextureRegion[1];
 		walkFrames[0] = tmp[0][0];
 		setAnimation(walkFrames, 1/12f);
+		moving = false;
 	}
 	
 	public void move(int dir){
@@ -45,16 +47,24 @@ public class Player extends AnimatedSprite{
 	}
 	
 	public void movePos(int dir){
-		Vector2 pos = body.getPosition();
-		float x = pos.x;
-		float y = pos.y;
-		switch(dir){
-			case 0: y -= moveUnit; break;
-			case 1: x -= moveUnit; break;
-			case 2: y += moveUnit; break;
-			case 3: x += moveUnit; break;
-		}
-		body.setTransform(new Vector2(x, y), body.getAngle());
+		//if(!moving){
+			//Vector2 pos = body.getPosition();
+//			float x = pos.x;
+//			float y = pos.y;
+			float x,y;
+			x = y = 0;
+			switch(dir){
+				case 0: y = -moveUnit*100; break;
+				case 1: x = -moveUnit*100; break;
+				case 2: y = moveUnit*100; break;
+				case 3: x = moveUnit*100; break;
+			}
+			body.setLinearVelocity(new Vector2(x,y));
+			//body.applyForce(new Vector2(x,y), body.getWorldCenter(), true);;
+			moving = true;
+//			body.setTransform(new Vector2(x, y), body.getAngle());
+		//}
+		
 	}
 
 	public void stop() {
@@ -63,5 +73,9 @@ public class Player extends AnimatedSprite{
 		walkFrames[0] = tmp;
 		animation.currentFrame = 0;
 		setAnimation(walkFrames,1/12f);
+		body.setLinearVelocity(new Vector2(0,0));
+		moving = false;
+		//body.applyForce(body.getLinearVelocity().scl(-1.0f), body.getWorldCenter(), true);
+		//body.setTransform(body.getPosition(), body.getAngle());
 	}
 }

@@ -1,20 +1,51 @@
 package screens;
 
+import java.util.ArrayList;
+
 import stages.GameStages;
+import stages.QuestionStage;
 import tpo.game.TPOGame2;
+import utils.Constants;
+import utils.GameStates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class GameScreen implements Screen{
 	
+	ArrayList<Stage> stages;
 	GameStages stage;
-	TPOGame2 game;
+	QuestionStage qStage;
+	TPOGame2 game;	
+	boolean qStageFirst;
+	boolean gameStageFirst;
 	
 	public GameScreen(TPOGame2 game){
 		this.game = game;
-		stage = new GameStages();
+		stages = new ArrayList<Stage>();
+		stages.add(new GameStages(game, Constants.DESERT));
+		stages.add(new GameStages(game, Constants.FOREST));
+		stages.add(new GameStages(game, Constants.SNOW));
+		stages.add(new GameStages(game, Constants.CAVE));
+		qStage = new QuestionStage(game);
+		stages.add(qStage);
+		qStageFirst = true;
+		gameStageFirst = true;
+		
+		setStage(game.stage);
+	}
+	
+	public void setStage(int i){
+		if(i <= 3){
+			stage = (GameStages)stages.get(i);
+			
+		}
+		else{
+			qStage = (QuestionStage)stages.get(i);
+		}
+		game.stage = i;
 	}
 	
 	@Override
@@ -28,9 +59,28 @@ public class GameScreen implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		//nekam shranmo ker state je in pol glede tega stata rišemo al špilo al pa question
-		stage.draw();
-		stage.act(delta);
-		
+
+		if(game.state == GameStates.GAME){
+			if(gameStageFirst){
+				gameStageFirst = false;
+				Gdx.input.setInputProcessor(stage);
+				qStageFirst = true;
+			}
+			stage.draw();
+			stage.act(delta);
+		}
+		else if(game.state == GameStates.QUESTION){
+			qStage.setAll("A to sploh kej dela?",new String[]{"Da","Ne","Nevem","Mogoèe"},1);
+			if(qStageFirst){
+				Gdx.input.setInputProcessor(qStage);
+				qStage.makeText();
+				qStage.setColor(232, 32, 23);
+				qStageFirst = false;
+				gameStageFirst = true;
+				}
+			qStage.draw();
+			qStage.act(delta);
+		}
 	}
 
 	@Override

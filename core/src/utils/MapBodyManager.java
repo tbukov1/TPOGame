@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.files.FileHandle;
@@ -95,9 +96,9 @@ public class MapBodyManager {
 	 * @param map map to be used to create the static bodies. 
 	 * @param layerName name of the layer that contains the shapes.
 	 */
-	public Body createPhysics(Map map, String layerName) {
+	public ArrayList<Body> createPhysics(Map map, String layerName) {
 		MapLayer layer = map.getLayers().get(layerName);
-		
+		ArrayList<Body> result = new ArrayList<Body>();
 		if (layer == null) {
 			logger.error("layer " + layerName + " does not exist");
 			return null;
@@ -154,8 +155,11 @@ public class MapBodyManager {
 			
 			fixtureDef.shape = null;
 			shape.dispose();
-			return body;
+			result.add(body);
+			
 		}
+		if(result.size()>0)
+			return result;
 		return null;
 	}
 	

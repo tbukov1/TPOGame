@@ -1,6 +1,11 @@
 package stages;
 
+import java.util.ArrayList;
+
+import tpo.game.TPOGame2;
 import utils.Camera;
+import utils.Constants;
+import utils.GameStates;
 import utils.MapBodyManager;
 import utils.WorldUtils;
 
@@ -24,42 +29,52 @@ import elements.Player;
 
 public class GameStages extends Stage implements InputProcessor {
 	private World world;
-	private Body ground;
+	private ArrayList<Body> ground;
 	private SpriteBatch sb;
 	private BodyDef groundDef;
 	private MyMap map;
+	TPOGame2 game;	
+	
+	float startX = 600;
+	float startY = 500;
 
 	float timeStep = 1 / 60f;
 	float accumulator = 0f;
+	int currentStage;
 
 	OrthographicCamera camera;
 	Box2DDebugRenderer renderer;
 	MapBodyManager mbm;
+	private boolean canLeave;
 
 	Player player;
 
-	public GameStages() {
-		setupCamera();
+	public GameStages(TPOGame2 game, int curStage) {
+		setupCamera(startX,startY);
 		sb = new SpriteBatch();
-		mbm = new MapBodyManager(world, 10, new FileHandle(
-				"data/map/materials.json"), 0);
 		world = WorldUtils.createWorld();
-		map = WorldUtils.createGround(world, "data/map/testMapa.tmx");
-		ground = mbm.createPhysics(map.tiledMap, "okvir");
+		mbm = new MapBodyManager(world, 1, new FileHandle(
+				"data/map/materials.json"), 0);
+		currentStage = curStage;
+		map = WorldUtils.createGround(world, Constants.MAP_NAMES[currentStage]);
+		ground = mbm.createPhysics(map.tiledMap, "physics");
 		// world.createBody(groundDef);
+		
 		renderer = new Box2DDebugRenderer();
 		Gdx.input.setInputProcessor(this);
-		createPlayer("data/player/sprites_player_3.png");
+		createPlayer("data/player/sprites_player_3.png",startX,startY);
+		this.game = game;
+		canLeave = false;
 	}
 
-	private void setupCamera() {
+	private void setupCamera(float x, float y) {
 		// TODO Auto-generated method stub
-		OrthographicCamera tmp = new OrthographicCamera(300,150);
-//		tmp.position.set(tmp.viewportWidth / 2,
-//				tmp.viewportHeight / 2, 0f);
-//		tmp.update();
-		Camera proba = new Camera(tmp);
+		//OrthographicCamera tmp = new OrthographicCamera(300,150);
+		
+		
 		camera = Camera.getCamera();
+		camera.position.set(x,
+				y, 0f);
 	}
 
 	@Override
@@ -70,18 +85,52 @@ public class GameStages extends Stage implements InputProcessor {
 		while (accumulator >= delta) {
 			world.step(timeStep, 6, 2);
 			accumulator -= timeStep;
-
 		}
 		player.update(delta);
+		float x, y;
+		x = Math.max(player.getPosition().x, 400);
+		x = Math.min(x, 624);
+		y = Math.max(player.getPosition().y, 200);
+		y = Math.min(y, 824);
+		
+		
+		camera.position.set(x, y, 0f);
+		//pogledam èe je na portu
+		if((player.getPosition().x > Constants.PORT_LOCATIONS[currentStage].x -15) &&
+				(player.getPosition().x < Constants.PORT_LOCATIONS[currentStage].x +15)){
+			
+			if((player.getPosition().y > Constants.PORT_LOCATIONS[currentStage].y-10) &&
+					(player.getPosition().y < Constants.PORT_LOCATIONS[currentStage].y+10)){
+				switchStage();
+				return;
+			}
+			
+		}
+		canLeave = true;
+		System.out.println("x: "+player.getPosition().x + " y:" + player.getPosition().y);
+	}
+	
+	
+	public void switchStage(){
+		if (canLeave){
+			canLeave = false;
+			if(currentStage == Constants.CAVE){
+				game.gameScreen.setStage(Constants.DESERT);
+			}else {
+				game.gameScreen.setStage(currentStage+1);
+			}
+			
+		}
 	}
 
-	private void createPlayer(String tex) {
+	private void createPlayer(String tex, float x, float y) {
 		BodyDef bdef = new BodyDef();
 		FixtureDef fdef = new FixtureDef();
 		PolygonShape shape = new PolygonShape();
 
-		bdef.position.set(0,0);
+		bdef.position.set(x,y);
 		bdef.type = BodyType.DynamicBody;
+		//bdef.linearVelocity.set(0,0);
 		Body body = world.createBody(bdef);
 
 		shape.setAsBox(10,	10);
@@ -90,6 +139,7 @@ public class GameStages extends Stage implements InputProcessor {
 
 		player = new Player(body, tex, 0.17f, 0.17f);
 		body.setUserData(player);
+		
 	}
 
 	@Override
@@ -99,7 +149,7 @@ public class GameStages extends Stage implements InputProcessor {
 		int dir = processInput();
 		if(dir == -1)
 			player.stop();
-		map.moveCamera(dir);
+		//map.moveCamera(dir);
 		Camera.getCamera().update();
 		
 		
@@ -126,6 +176,8 @@ public class GameStages extends Stage implements InputProcessor {
 			player.move(0);
 			return 0;
 		}
+		if(Gdx.input.isKeyPressed(Input.Keys.Q))
+			game.state = GameStates.QUESTION;
 		return -1;
 	}
 

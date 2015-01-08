@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -26,7 +25,6 @@ public class MainMenu implements Screen {
 	private Stage stage;
 	OrthographicCamera cam;
 	Skin skin;
-	SpriteBatch sb;
 	String[] buttons;
 	ArrayList<TextButton> buttonArray;
 
@@ -38,7 +36,6 @@ public class MainMenu implements Screen {
 		cam = new OrthographicCamera(Constants.APP_WIDTH, Constants.APP_HEIGHT);
 		cam.translate(Constants.APP_WIDTH / 2, Constants.APP_HEIGHT / 2);
 		cam.update();
-		sb = new SpriteBatch();
 		skin = new Skin();
 		buttons = new String[] { "Play", "Settings", "Quit" };
 		buttonArray = new ArrayList<TextButton>();
@@ -53,7 +50,7 @@ public class MainMenu implements Screen {
 
 		skin.add("blue", new Texture(pixmap));
 		BitmapFont font = new BitmapFont();
-		font.scale(0.8f);
+		font.scale(0.9f);
 		skin.add("default", font);
 
 		TextButtonStyle tBSyle = new TextButtonStyle();
