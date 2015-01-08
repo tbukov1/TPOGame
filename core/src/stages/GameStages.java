@@ -40,21 +40,23 @@ public class GameStages extends Stage implements InputProcessor {
 
 	float timeStep = 1 / 60f;
 	float accumulator = 0f;
+	int currentStage;
 
 	OrthographicCamera camera;
 	Box2DDebugRenderer renderer;
 	MapBodyManager mbm;
+	private boolean canLeave;
 
 	Player player;
 
-	public GameStages(TPOGame2 game) {
+	public GameStages(TPOGame2 game, int curStage) {
 		setupCamera(startX,startY);
 		sb = new SpriteBatch();
 		world = WorldUtils.createWorld();
 		mbm = new MapBodyManager(world, 1, new FileHandle(
 				"data/map/materials.json"), 0);
-		
-		map = WorldUtils.createGround(world, Constants.MAP_NAMES[Constants.DESERT]);
+		currentStage = curStage;
+		map = WorldUtils.createGround(world, Constants.MAP_NAMES[currentStage]);
 		ground = mbm.createPhysics(map.tiledMap, "physics");
 		// world.createBody(groundDef);
 		
@@ -62,6 +64,7 @@ public class GameStages extends Stage implements InputProcessor {
 		Gdx.input.setInputProcessor(this);
 		createPlayer("data/player/sprites_player_3.png",startX,startY);
 		this.game = game;
+		canLeave = false;
 	}
 
 	private void setupCamera(float x, float y) {
@@ -92,8 +95,32 @@ public class GameStages extends Stage implements InputProcessor {
 		
 		
 		camera.position.set(x, y, 0f);
-		
+		//pogledam èe je na portu
+		if((player.getPosition().x > Constants.PORT_LOCATIONS[currentStage].x -15) &&
+				(player.getPosition().x < Constants.PORT_LOCATIONS[currentStage].x +15)){
+			
+			if((player.getPosition().y > Constants.PORT_LOCATIONS[currentStage].y-10) &&
+					(player.getPosition().y < Constants.PORT_LOCATIONS[currentStage].y+10)){
+				switchStage();
+				return;
+			}
+			
+		}
+		canLeave = true;
 		System.out.println("x: "+player.getPosition().x + " y:" + player.getPosition().y);
+	}
+	
+	
+	public void switchStage(){
+		if (canLeave){
+			canLeave = false;
+			if(currentStage == Constants.CAVE){
+				game.gameScreen.setStage(Constants.DESERT);
+			}else {
+				game.gameScreen.setStage(currentStage+1);
+			}
+			
+		}
 	}
 
 	private void createPlayer(String tex, float x, float y) {
@@ -112,6 +139,7 @@ public class GameStages extends Stage implements InputProcessor {
 
 		player = new Player(body, tex, 0.17f, 0.17f);
 		body.setUserData(player);
+		
 	}
 
 	@Override
