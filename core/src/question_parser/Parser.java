@@ -10,6 +10,10 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class Parser {
@@ -20,7 +24,8 @@ public class Parser {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(ClassLoader.getSystemResourceAsStream(filepath));
+			FileHandle fh = Gdx.files.internal("data/"+filepath);
+			Document document = builder.parse(fh.read());
 
 			NodeList nodeList = document.getDocumentElement().getChildNodes();
 		
