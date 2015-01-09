@@ -21,22 +21,13 @@ public class Question {
 		this.answers = answers;
 		this.correctAnswer = correctAnswer;
 		answered = false;
-		attempt = 1;
+		attempt = 0;
 	}
 
 	public String getText() {
 		return text;
 	}
-
-	// public ArrayList<String> returnAnswers(){
-	// ArrayList<String> listic = new ArrayList<String>();
-	// listic.add(answer1);
-	// listic.add(answer2);
-	// listic.add(answer3);
-	// listic.add(answer4);
-	//
-	// return listic;
-	// }
+	
 	public ArrayList<String> getAnswers() {
 		return answers;
 	}

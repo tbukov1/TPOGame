@@ -1,0 +1,2 @@
+points:1500
+stage:0

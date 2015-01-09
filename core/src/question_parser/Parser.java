@@ -24,7 +24,7 @@ public class Parser {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			FileHandle fh = Gdx.files.internal("data/"+filepath);
+			FileHandle fh = Gdx.files.internal(filepath);
 			Document document = builder.parse(fh.read());
 
 			NodeList nodeList = document.getDocumentElement().getChildNodes();
@@ -69,7 +69,7 @@ public class Parser {
 									if(nodeAnswer instanceof Element){
 										answers.add(nodeAnswer.getTextContent()); 
 										if(nodeAnswer.getAttributes() != null){
-											que.correctAnswer = i;
+											que.correctAnswer = i - 1;
 										}
 									}
 								}

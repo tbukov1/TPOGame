@@ -70,13 +70,11 @@ public class QuestionStage extends Stage implements InputProcessor {
 			buttonArray.get(i).addListener(new ClickListener(){
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-//					System.out.println(tmp);
-//					Question tmpQ = game.questions.get(tmp);
 					if(textOnButton.equals(question.getAnswers().get(question.getcorrectAnswer()))){
 						System.out.println("BRAVO!!!");
-						if(question.attempt == 1){
+						if(question.attempt == 0){
 							game.points += Constants.POINTS;
-						}else if(question.attempt == 2){
+						}else if(question.attempt == 1){
 							game.points += Constants.POINTS/2;
 						}
 						question.answered = true;
@@ -87,7 +85,6 @@ public class QuestionStage extends Stage implements InputProcessor {
 						question.attempt++;
 						}
 					//TODO dodaš zaslon da prkaže al si odgovoru prou ali narobe
-//					game.questions.set(tmp, tmpQ);
 					game.state = GameStates.GAME;
 				}
 			});
@@ -96,29 +93,7 @@ public class QuestionStage extends Stage implements InputProcessor {
 
 	public void setQuestion(Question question) {
 		this.question = question;
-//		this.index = index;
 	}
-
-//	public void setAnswers(String[] tab) {
-//		answers = tab;
-//	}
-//
-//	public void setCorrectAnswer(int correctAnswer) {
-//		this.correctAnswer = correctAnswer;
-//	}
-//
-//	public void setAll(String q, String[] a, int cor) {
-//		setQuestion(q);
-//		setAnswers(a);
-//		setCorrectAnswer(cor);
-//	}
-//
-//	public void setAll(Question question) {
-//		setQuestion(question.returnText());
-//		setAnswers(question.returnAnswers());
-//		setCorrectAnswer(question.returncorrectAnswer());
-//	}
-
 	public void makeText() {
 		skin = new Skin();
 		buttonArray = new ArrayList<TextButton>();
@@ -152,7 +127,7 @@ public class QuestionStage extends Stage implements InputProcessor {
 			if (prev != null)
 				b += prev.getWidth() + margin;
 			tmp.setPosition(offsetL + b, Constants.APP_HEIGHT / 2 - offsetT);
-			addActor(tmp);
+			addActor(tmp);	
 			buttonArray.add(tmp);
 			prev = tmp;
 		}

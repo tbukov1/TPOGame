@@ -1,11 +1,10 @@
 package tpo.game;
 
-import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import question_parser.Parser;
 import question_parser.Question;
-
 import screens.GameScreen;
 import screens.MainMenu;
 import screens.SpriteScreen;
@@ -24,11 +23,14 @@ public class TPOGame2 extends Game {
 	public float points;
 	public FileHandle fh;	
 
-	public ArrayList<Question> questions;
+//	public ArrayList<Question> questions;
+	
+	public HashMap<String, ArrayList<Question>> questions;
 	
 	@Override
 	public void create() {
-		questions = new ArrayList<Question>();
+//		questions = new ArrayList<Question>();
+		questions = new HashMap<String, ArrayList<Question>>();
 		try{
 			fh = Gdx.files.internal("data/file.txt");
 			String[] file = fh.readString().split("\n");
@@ -42,18 +44,12 @@ public class TPOGame2 extends Game {
 		
 
 		//TODO s parserjem nafili questions glede na stage;
-//		questions.add(new Question("0","A to sploh kej dela0?",new String[]{"Da","Ne","Nevem","Mogoèe"},1));
-//		questions.add(new Question("1","A to sploh kej dela1?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-//		questions.add(new Question("2","A to sploh kej dela2?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-//		questions.add(new Question("3","A to sploh kej dela3?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-//		questions.add(new Question("4","A to sploh kej dela4?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-//		questions.add(new Question("5","A to sploh kej dela5?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-//		questions.add(new Question("6","A to sploh kej dela6?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-//		questions.add(new Question("7","A to sploh kej dela7?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-		questions = Parser.getQuestion("Questions.xml", Constants.SUBJECT_QUESTION[stage]);
+		for (String subject : Constants.SUBJECT_QUESTION) {
+			questions.put(subject, Parser.getQuestion("data/Questions.xml", subject));
+		}
+//		questions = Parser.getQuestion("data/Questions.xml", Constants.SUBJECT_QUESTION[stage]);
 		
 		state = GameStates.GAME;
-//		stage = Constants.DESERT;//glede na to kje je ustou u prejšno, 
 		mainMenuScreen = new MainMenu(this);
 		gameScreen = new GameScreen(this);
 		spriteScreen = new SpriteScreen(this, "data/krajfar_splash.png");

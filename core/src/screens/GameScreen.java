@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import question_parser.Question;
-
 import stages.GameStages;
 import stages.QuestionStage;
 import tpo.game.TPOGame2;
@@ -30,10 +29,10 @@ public class GameScreen implements Screen{
 		this.game = game;
 		naklj = new Random();
 		stages = new ArrayList<Stage>();
-		stages.add(new GameStages(game, Constants.DESERT));
-		stages.add(new GameStages(game, Constants.FOREST));
-		stages.add(new GameStages(game, Constants.SNOW));
-		stages.add(new GameStages(game, Constants.CAVE));
+		stages.add(new GameStages(game, Constants.DESERT, Constants.SUBJECT_QUESTION[0]));
+		stages.add(new GameStages(game, Constants.FOREST, Constants.SUBJECT_QUESTION[1]));
+		stages.add(new GameStages(game, Constants.SNOW, Constants.SUBJECT_QUESTION[2]));
+		stages.add(new GameStages(game, Constants.CAVE, Constants.SUBJECT_QUESTION[3]));
 		qStage = new QuestionStage(game);
 		stages.add(qStage);
 		qStageFirst = true;
@@ -64,6 +63,7 @@ public class GameScreen implements Screen{
 
 		if(game.state == GameStates.GAME){
 			if(gameStageFirst){
+				qStage.unfocusAll();
 				gameStageFirst = false;
 				Gdx.input.setInputProcessor(stage);
 				qStageFirst = true;
@@ -72,25 +72,21 @@ public class GameScreen implements Screen{
 			stage.act(delta);
 		}
 		else if(game.state == GameStates.QUESTION){
-//			Parser p = new Parser();
-//			ArrayList<Question> question = p.getQuestion("Questions.xml", Constants.SUBJECT_QUESTION[1], 0);
-//			for (Question question2 : question) {
-//				System.out.println(question2);
-//			}
 			if(qStageFirst){		
 				//TODO izbere tist uprašane, ke ga ma monster ke se ga dotakneš, èe še ni rešen
 				Question tmp = null;
 				int index = 0;
 				do{
-					if(index > game.questions.size()){
+					if(index > game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).size()){
 						tmp = null;
 						break;
 					}
-					tmp= game.questions.get(naklj.nextInt(game.questions.size()));
+					tmp= game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).get(naklj.nextInt(game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).size()));
 					System.out.println(tmp.answered);
 					index++;
 				}while(tmp.answered);
-				
+
+				qStage = new QuestionStage(game);
 				qStage.setQuestion(tmp);
 				Gdx.input.setInputProcessor(qStage);
 				qStage.makeText();

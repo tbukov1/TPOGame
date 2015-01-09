@@ -42,4 +42,23 @@
   	        </Answers>  	        
   	    </Question>
 	</Class>
+	<Class type="history">
+  	    <Question number="1">
+  	        <Text type="question">First president of USA?</Text>
+  	        <Answers type="answers">
+  	            <Answer type="correct">Benjamin Frankiln</Answer>
+  	            <Answer>Obama</Answer>
+  	            <Answer>Bush</Answer>
+  	        </Answers>  	        
+  	    </Question>
+  	    <Question number="2">
+  	        <Text type="question">First metal age?</Text>
+  	        <Answers type="answers">
+  	            <Answer>Bronze</Answer>
+  	            <Answer>Gold</Answer>
+  	            <Answer type="correct">Stone</Answer>
+  	            <Answer>Iron</Answer>
+  	        </Answers>  	        
+  	    </Question>
+	</Class>
 </Classes>

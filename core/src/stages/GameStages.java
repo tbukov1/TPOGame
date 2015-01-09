@@ -3,6 +3,8 @@ package stages;
 import java.util.ArrayList;
 import java.util.Random;
 
+import question_parser.Parser;
+
 import tpo.game.TPOGame2;
 import utils.Camera;
 import utils.Constants;
@@ -49,12 +51,14 @@ public class GameStages extends Stage implements InputProcessor {
 	OrthographicCamera camera;
 	Box2DDebugRenderer renderer;
 	MapBodyManager mbm;
+	String subject;
 	private boolean canLeave;
 
 	Player player;
 
-	public GameStages(TPOGame2 game, int curStage) {
+	public GameStages(TPOGame2 game, int curStage, String subject) {
 		setupCamera(startX,startY);
+		this.subject = subject;
 		sb = new SpriteBatch();
 		world = WorldUtils.createWorld();
 		mbm = new MapBodyManager(world, 1, new FileHandle(
@@ -70,19 +74,23 @@ public class GameStages extends Stage implements InputProcessor {
 		
 		createPlayer("data/player/sprites_player_3.png",startX,startY);
 		
-		//draw monsters
-		monsters = new ArrayList<Monster>();
-		Random naklj = new Random();		
-		for (int i = 0; i < game.questions.size(); i++) {
-			int x = naklj.nextInt(900)+50, y = naklj.nextInt(900)+50;
-			createMonster(Constants.MONSTERS[naklj.nextInt(Constants.MONSTERS.length)], x, y,i);
-		}
+		createMonsters();
 		
 		canLeave = false;
 	}
 
+	public void createMonsters(){
+		//create monsters
+		monsters = new ArrayList<Monster>();
+		Random naklj = new Random();		
+		for (int i = 0; i < game.questions.get(subject).size(); i++) {
+			int x = naklj.nextInt(900)+50, y = naklj.nextInt(900)+50;
+			createMonster(Constants.MONSTERS[naklj.nextInt(Constants.MONSTERS.length)], x, y,i);
+		}
+	}
+	
+	
 	private void setupCamera(float x, float y) {
-		// TODO Auto-generated method stub
 		//OrthographicCamera tmp = new OrthographicCamera(300,150);
 		
 		
@@ -133,7 +141,7 @@ public class GameStages extends Stage implements InputProcessor {
 			}else {
 				game.gameScreen.setStage(currentStage+1);
 			}
-			
+//			createMonsters();
 		}
 	}
 
@@ -174,7 +182,7 @@ public class GameStages extends Stage implements InputProcessor {
 		body.createFixture(fdef).setUserData("monster"+count);
 		Random naklj = new Random();	
 		
-		monsters.add(new Monster(body, tex, game.questions.get(naklj.nextInt(game.questions.size())), 0.30f, 0.30f));
+		monsters.add(new Monster(body, tex, game.questions.get(subject).get(count), 0.30f, 0.30f));
 		body.setUserData(monsters.get(count));
 	}
 
