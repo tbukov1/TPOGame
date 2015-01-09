@@ -1,6 +1,7 @@
 package stages;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import tpo.game.TPOGame2;
 import utils.Camera;
@@ -20,17 +21,20 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.MassData;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import elements.Monster;
 import elements.MyMap;
 import elements.Player;
 
 public class GameStages extends Stage implements InputProcessor {
 	private World world;
 	private ArrayList<Body> ground;
-	private SpriteBatch sb;
+	private ArrayList<Monster> monsters;
+ 	private SpriteBatch sb;
 	private BodyDef groundDef;
 	private MyMap map;
 	TPOGame2 game;	
@@ -59,11 +63,21 @@ public class GameStages extends Stage implements InputProcessor {
 		map = WorldUtils.createGround(world, Constants.MAP_NAMES[currentStage]);
 		ground = mbm.createPhysics(map.tiledMap, "physics");
 		// world.createBody(groundDef);
-		
+
+		this.game = game;
 		renderer = new Box2DDebugRenderer();
 		Gdx.input.setInputProcessor(this);
+		
 		createPlayer("data/player/sprites_player_3.png",startX,startY);
-		this.game = game;
+		
+		//draw monsters
+		monsters = new ArrayList<Monster>();
+		Random naklj = new Random();		
+		for (int i = 0; i < game.questions.size(); i++) {
+			int x = naklj.nextInt(900)+50, y = naklj.nextInt(900)+50;
+			createMonster(Constants.MONSTERS[naklj.nextInt(Constants.MONSTERS.length)], x, y,i);
+		}
+		
 		canLeave = false;
 	}
 
@@ -107,7 +121,7 @@ public class GameStages extends Stage implements InputProcessor {
 			
 		}
 		canLeave = true;
-		System.out.println("x: "+player.getPosition().x + " y:" + player.getPosition().y);
+//		System.out.println("x: "+player.getPosition().x + " y:" + player.getPosition().y);
 	}
 	
 	
@@ -141,10 +155,31 @@ public class GameStages extends Stage implements InputProcessor {
 		body.setUserData(player);
 		
 	}
+	private void createMonster(String tex, float x, float y, int count){
+		BodyDef bdef = new BodyDef();
+		FixtureDef fdef = new FixtureDef();
+		PolygonShape shape = new PolygonShape();
+
+		bdef.position.set(x,y);
+		bdef.type = BodyType.DynamicBody;
+		Body body = world.createBody(bdef);
+		
+		
+		MassData md  = new MassData();
+		md.mass = 5000000f;
+		body.setMassData(md);
+
+		shape.setAsBox(40,	40);
+		fdef.shape = shape;
+		body.createFixture(fdef).setUserData("monster"+count);
+		Random naklj = new Random();	
+		
+		monsters.add(new Monster(body, tex, game.questions.get(naklj.nextInt(game.questions.size())), 0.30f, 0.30f));
+		body.setUserData(monsters.get(count));
+	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
 		super.draw();
 		int dir = processInput();
 		if(dir == -1)
@@ -155,6 +190,9 @@ public class GameStages extends Stage implements InputProcessor {
 		
 		map.render();
 		player.render(sb);
+		for (Monster monster : monsters) {
+			monster.render(sb);
+		}
 
 		renderer.render(world, camera.combined);
 	}

@@ -1,9 +1,7 @@
 package screens;
 
 import java.util.ArrayList;
-
-import question_parser.Parser;
-import question_parser.Question;
+import java.util.Random;
 
 import stages.GameStages;
 import stages.QuestionStage;
@@ -24,9 +22,11 @@ public class GameScreen implements Screen{
 	TPOGame2 game;	
 	boolean qStageFirst;
 	boolean gameStageFirst;
+	Random naklj;
 	
 	public GameScreen(TPOGame2 game){
 		this.game = game;
+		naklj = new Random();
 		stages = new ArrayList<Stage>();
 		stages.add(new GameStages(game, Constants.DESERT));
 		stages.add(new GameStages(game, Constants.FOREST));
@@ -58,10 +58,7 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		//nekam shranmo ker state je in pol glede tega stata rišemo al špilo al pa question
 
 		if(game.state == GameStates.GAME){
 			if(gameStageFirst){
@@ -73,13 +70,15 @@ public class GameScreen implements Screen{
 			stage.act(delta);
 		}
 		else if(game.state == GameStates.QUESTION){
-			Parser p = new Parser();
-			ArrayList<Question> question = p.getQuestion("Questions.xml", Constants.SUBJECT_QUESTION[1], 0);
-			for (Question question2 : question) {
-				System.out.println(question2);
-			}
-			qStage.setAll("A to sploh kej dela?",new String[]{"Da","Ne","Nevem","Mogoèe"},1);
-			if(qStageFirst){
+//			Parser p = new Parser();
+//			ArrayList<Question> question = p.getQuestion("Questions.xml", Constants.SUBJECT_QUESTION[1], 0);
+//			for (Question question2 : question) {
+//				System.out.println(question2);
+//			}
+			if(qStageFirst){// choose random questionom iz game.questions
+				
+				
+				qStage.setAll(game.questions.get(naklj.nextInt(game.questions.size())));
 				Gdx.input.setInputProcessor(qStage);
 				qStage.makeText();
 				qStage.setColor(232, 32, 23);
