@@ -72,7 +72,7 @@ public class QuestionStage extends Stage implements InputProcessor {
 				public void clicked(InputEvent event, float x, float y) {
 //					System.out.println(tmp);
 //					Question tmpQ = game.questions.get(tmp);
-					if(textOnButton.equals(question.getAnswers()[question.getcorrectAnswer()])){
+					if(textOnButton.equals(question.getAnswers().get(question.getcorrectAnswer()))){
 						System.out.println("BRAVO!!!");
 						if(question.attempt == 1){
 							game.points += Constants.POINTS;
@@ -147,8 +147,8 @@ public class QuestionStage extends Stage implements InputProcessor {
 		skin.add("default", tBSyle);
 		TextButton prev = null;
 		float b = 0;
-		for (int i = 0; i < question.getAnswers().length; i++) {
-			TextButton tmp = new TextButton(question.getAnswers()[i], tBSyle);
+		for (int i = 0; i < question.getAnswers().size(); i++) {
+			TextButton tmp = new TextButton(question.getAnswers().get(i), tBSyle);
 			if (prev != null)
 				b += prev.getWidth() + margin;
 			tmp.setPosition(offsetL + b, Constants.APP_HEIGHT / 2 - offsetT);
