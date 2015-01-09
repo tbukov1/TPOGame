@@ -36,18 +36,19 @@ public class TPOGame2 extends Game {
 		}
 		catch(Exception e){
 			stage = Constants.DESERT;
+			System.out.print("There is no file!");
 		}
 		
 
 		//TODO s parserjem nafili questions glede na stage;
-		questions.add(new Question("bla","A to sploh kej dela0?",new String[]{"Da","Ne","Nevem","Mogoèe"},1));
-		questions.add(new Question("muhehuha","A to sploh kej dela1?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-		questions.add(new Question("muhehuha","A to sploh kej dela2?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-		questions.add(new Question("muhehuha","A to sploh kej dela3?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-		questions.add(new Question("muhehuha","A to sploh kej dela4?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-		questions.add(new Question("muhehuha","A to sploh kej dela5?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-		questions.add(new Question("muhehuha","A to sploh kej dela6?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
-		questions.add(new Question("muhehuha","A to sploh kej dela7?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
+		questions.add(new Question("0","A to sploh kej dela0?",new String[]{"Da","Ne","Nevem","Mogoèe"},1));
+		questions.add(new Question("1","A to sploh kej dela1?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
+		questions.add(new Question("2","A to sploh kej dela2?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
+		questions.add(new Question("3","A to sploh kej dela3?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
+		questions.add(new Question("4","A to sploh kej dela4?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
+		questions.add(new Question("5","A to sploh kej dela5?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
+		questions.add(new Question("6","A to sploh kej dela6?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
+		questions.add(new Question("7","A to sploh kej dela7?",new String[]{"Da","Ne","Nevem","Mogoèe"},0));
 		
 		state = GameStates.GAME;
 //		stage = Constants.DESERT;//glede na to kje je ustou u prejšno, 

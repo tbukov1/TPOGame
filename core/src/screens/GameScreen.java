@@ -3,6 +3,8 @@ package screens;
 import java.util.ArrayList;
 import java.util.Random;
 
+import question_parser.Question;
+
 import stages.GameStages;
 import stages.QuestionStage;
 import tpo.game.TPOGame2;
@@ -75,10 +77,21 @@ public class GameScreen implements Screen{
 //			for (Question question2 : question) {
 //				System.out.println(question2);
 //			}
-			if(qStageFirst){// choose random questionom iz game.questions
+			if(qStageFirst){		
+				//TODO izbere tist uprašane, ke ga ma monster ke se ga dotakneš, èe še ni rešen
+				Question tmp = null;
+				int index = 0;
+				do{
+					if(index > game.questions.size()){
+						tmp = null;
+						break;
+					}
+					tmp= game.questions.get(naklj.nextInt(game.questions.size()));
+					System.out.println(tmp.answered);
+					index++;
+				}while(tmp.answered);
 				
-				
-				qStage.setAll(game.questions.get(naklj.nextInt(game.questions.size())));
+				qStage.setQuestion(tmp);
 				Gdx.input.setInputProcessor(qStage);
 				qStage.makeText();
 				qStage.setColor(232, 32, 23);

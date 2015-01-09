@@ -28,9 +28,11 @@ public class QuestionStage extends Stage implements InputProcessor {
 	// za prikazovanje vprašanj in klik na gumbe. èe je rezultat praviln shranš
 	// nekam
 
-	public String question;
-	public String[] answers;
-	public int correctAnswer;
+//	public String question;
+//	public String[] answers;
+//	public int correctAnswer;
+	public Question question;
+	public int index;
 	public float margin, offsetL, offsetT;
 	TPOGame2 game;
 
@@ -54,63 +56,68 @@ public class QuestionStage extends Stage implements InputProcessor {
 	@Override
 	public void draw() {
 		super.draw();
-		float w = font.getBounds(question).width / 2;
-		float h = font.getBounds(question).height;
+		float w = font.getBounds(question.getText()).width / 2;
+		float h = font.getBounds(question.getText()).height;
 		sb.begin();
-		font.drawMultiLine(sb, question, Constants.APP_WIDTH / 2 - w,
+		font.drawMultiLine(sb, question.getText(), Constants.APP_WIDTH / 2 - w,
 				Constants.APP_HEIGHT - (h));
 		sb.end();
 	}
 
 	private void show() {
 		for (int i = 0; i < buttonArray.size(); i++) {
-			final int tmp = i;
+			final String textOnButton = buttonArray.get(i).getText().toString();
 			buttonArray.get(i).addListener(new ClickListener(){
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					if(tmp == correctAnswer){
+//					System.out.println(tmp);
+//					Question tmpQ = game.questions.get(tmp);
+					if(textOnButton.equals(question.getAnswers()[question.getcorrectAnswer()])){
 						System.out.println("BRAVO!!!");
-						if(game.questions.get(tmp).attempt == 1){
+						if(question.attempt == 1){
 							game.points += Constants.POINTS;
-						}else if(game.questions.get(tmp).attempt == 2){
+						}else if(question.attempt == 2){
 							game.points += Constants.POINTS/2;
 						}
-						game.questions.get(tmp).answered = true;
+						question.answered = true;
+						System.out.println(game.points);
 						}
 					else{//ne pršteješ polnih toèk
 						System.out.println("NIMAŠ POJMA!!!");
-						game.questions.get(tmp).attempt++;
+						question.attempt++;
 						}
 					//TODO dodaš zaslon da prkaže al si odgovoru prou ali narobe
+//					game.questions.set(tmp, tmpQ);
 					game.state = GameStates.GAME;
 				}
 			});
 		}
 	}
 
-	public void setQuestion(String question) {
+	public void setQuestion(Question question) {
 		this.question = question;
+//		this.index = index;
 	}
 
-	public void setAnswers(String[] tab) {
-		answers = tab;
-	}
-
-	public void setCorrectAnswer(int correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
-
-	public void setAll(String q, String[] a, int cor) {
-		setQuestion(q);
-		setAnswers(a);
-		setCorrectAnswer(cor);
-	}
-
-	public void setAll(Question question) {
-		setQuestion(question.returnText());
-		setAnswers(question.returnAnswers());
-		setCorrectAnswer(question.returncorrectAnswer());
-	}
+//	public void setAnswers(String[] tab) {
+//		answers = tab;
+//	}
+//
+//	public void setCorrectAnswer(int correctAnswer) {
+//		this.correctAnswer = correctAnswer;
+//	}
+//
+//	public void setAll(String q, String[] a, int cor) {
+//		setQuestion(q);
+//		setAnswers(a);
+//		setCorrectAnswer(cor);
+//	}
+//
+//	public void setAll(Question question) {
+//		setQuestion(question.returnText());
+//		setAnswers(question.returnAnswers());
+//		setCorrectAnswer(question.returncorrectAnswer());
+//	}
 
 	public void makeText() {
 		skin = new Skin();
@@ -140,8 +147,8 @@ public class QuestionStage extends Stage implements InputProcessor {
 		skin.add("default", tBSyle);
 		TextButton prev = null;
 		float b = 0;
-		for (int i = 0; i < answers.length; i++) {
-			TextButton tmp = new TextButton(answers[i], tBSyle);
+		for (int i = 0; i < question.getAnswers().length; i++) {
+			TextButton tmp = new TextButton(question.getAnswers()[i], tBSyle);
 			if (prev != null)
 				b += prev.getWidth() + margin;
 			tmp.setPosition(offsetL + b, Constants.APP_HEIGHT / 2 - offsetT);

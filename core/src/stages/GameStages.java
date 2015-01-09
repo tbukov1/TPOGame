@@ -191,7 +191,8 @@ public class GameStages extends Stage implements InputProcessor {
 		map.render();
 		player.render(sb);
 		for (Monster monster : monsters) {
-			monster.render(sb);
+			if(!monster.question.answered)
+				monster.render(sb);
 		}
 
 		renderer.render(world, camera.combined);

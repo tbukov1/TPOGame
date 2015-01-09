@@ -24,7 +24,7 @@ public class Question {
 		attempt = 1;
 	}
 
-	public String returnText() {
+	public String getText() {
 		return text;
 	}
 
@@ -37,11 +37,11 @@ public class Question {
 	//
 	// return listic;
 	// }
-	public String[] returnAnswers() {
+	public String[] getAnswers() {
 		return answers;
 	}
 
-	public int returncorrectAnswer() {
+	public int getcorrectAnswer() {
 		return correctAnswer;
 	}
 
