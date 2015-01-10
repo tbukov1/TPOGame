@@ -20,10 +20,8 @@ public class TPOGame2 extends Game {
 	public GameScreen gameScreen;
 	SpriteScreen spriteScreen;
 	public int state, stage;
-	public float points;
+	public int points;
 	public FileHandle fh;	
-
-//	public ArrayList<Question> questions;
 	
 	public HashMap<String, ArrayList<Question>> questions;
 	
@@ -32,9 +30,9 @@ public class TPOGame2 extends Game {
 //		questions = new ArrayList<Question>();
 		questions = new HashMap<String, ArrayList<Question>>();
 		try{
-			fh = Gdx.files.internal("data/file.txt");
+			fh = Gdx.files.local("file.txt");
 			String[] file = fh.readString().split("\n");
-			points = Float.parseFloat(file[0].replaceAll("\\r|\\n", "").split(":")[1]);
+			points = Integer.parseInt(file[0].replaceAll("\\r|\\n", "").split(":")[1]);
 			stage = Integer.parseInt(file[1].replaceAll("\\r|\\n", "").split(":")[1]);
 		}
 		catch(Exception e){

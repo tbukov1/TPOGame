@@ -3,8 +3,6 @@ package stages;
 import java.util.ArrayList;
 import java.util.Random;
 
-import question_parser.Parser;
-
 import tpo.game.TPOGame2;
 import utils.Camera;
 import utils.Constants;
@@ -84,8 +82,18 @@ public class GameStages extends Stage implements InputProcessor {
 		monsters = new ArrayList<Monster>();
 		Random naklj = new Random();		
 		for (int i = 0; i < game.questions.get(subject).size(); i++) {
-			int x = naklj.nextInt(900)+50, y = naklj.nextInt(900)+50;
-			createMonster(Constants.MONSTERS[naklj.nextInt(Constants.MONSTERS.length)], x, y,i);
+			do{
+			int x = naklj.nextInt(900)+50;
+			int y = naklj.nextInt(900)+50;
+			if(!((x > Constants.PORT_LOCATIONS[currentStage].x -15) &&
+					(x < Constants.PORT_LOCATIONS[currentStage].x +15))){
+				
+				if(!((y > Constants.PORT_LOCATIONS[currentStage].y-10) &&
+						(y < Constants.PORT_LOCATIONS[currentStage].y+10))){
+					createMonster(Constants.MONSTERS[naklj.nextInt(Constants.MONSTERS.length)], x, y,i);
+					break;
+				}}
+			}while(true);
 		}
 	}
 	
@@ -140,8 +148,9 @@ public class GameStages extends Stage implements InputProcessor {
 				game.gameScreen.setStage(Constants.DESERT);
 			}else {
 				game.gameScreen.setStage(currentStage+1);
-			}
-//			createMonsters();
+			}			
+			//TODO piši v datoteko
+			game.fh.writeString("points:"+game.points+"\n\rstage:"+game.stage,false);
 		}
 	}
 

@@ -74,6 +74,8 @@ public class GameScreen implements Screen{
 		else if(game.state == GameStates.QUESTION){
 			if(qStageFirst){		
 				//TODO izbere tist uprašane, ke ga ma monster ke se ga dotakneš, èe še ni rešen
+				//se ne bo rabil ke bo narjen collison 
+				//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				Question tmp = null;
 				int index = 0;
 				do{
@@ -82,10 +84,9 @@ public class GameScreen implements Screen{
 						break;
 					}
 					tmp= game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).get(naklj.nextInt(game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).size()));
-					System.out.println(tmp.answered);
 					index++;
 				}while(tmp.answered);
-
+				//------------------------------------------------------------------------------------
 				qStage = new QuestionStage(game);
 				qStage.setQuestion(tmp);
 				Gdx.input.setInputProcessor(qStage);
