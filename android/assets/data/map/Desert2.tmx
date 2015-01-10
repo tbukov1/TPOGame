@@ -22,9 +22,6 @@
   </data>
  </layer>
  <objectgroup name="physics">
-  <object x="66" y="32" width="98" height="132">
-   <ellipse/>
-  </object>
   <object x="76" y="924">
    <polyline points="0,0 46,6 40,38 8,42 -10,20 2,0"/>
   </object>
@@ -38,5 +35,8 @@
   <object x="1023" y="1" width="3" height="1036"/>
   <object x="2" y="0" width="1024" height="5"/>
   <object x="5" y="1018" width="1020" height="7"/>
+  <object x="95" y="46">
+   <polyline points="0,0 -32,25 -36,73 -19,111 30,123 70,80 66,33 37,1 -1,-1"/>
+  </object>
  </objectgroup>
 </map>

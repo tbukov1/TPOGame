@@ -20,7 +20,12 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.MassData;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -59,6 +64,7 @@ public class GameStages extends Stage implements InputProcessor {
 		this.subject = subject;
 		sb = new SpriteBatch();
 		world = WorldUtils.createWorld();
+		setContactListener();
 		mbm = new MapBodyManager(world, 1, new FileHandle(
 				"data/map/materials.json"), 0);
 		currentStage = curStage;
@@ -95,6 +101,42 @@ public class GameStages extends Stage implements InputProcessor {
 				}}
 			}while(true);
 		}
+	}
+	
+	private void setContactListener(){
+		world.setContactListener(new ContactListener() 
+		 {
+
+            @Override
+            public void beginContact(Contact contact) {
+            	Fixture fixtureA = contact.getFixtureA();
+                Fixture fixtureB = contact.getFixtureB();
+                if (fixtureA.getUserData() != null && fixtureB.getUserData() != null){
+	                if(fixtureA.getUserData().equals("player") || fixtureB.getUserData().equals("player") ){
+	                	if(((String)fixtureA.getUserData()).startsWith("monster") || ((String)fixtureB.getUserData()).startsWith("monster")){
+	                		System.out.println("contact");
+	                	}
+	                }
+                }  
+                //Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+//                Fixture fixtureA = contact.getFixtureA();
+//                Fixture fixtureB = contact.getFixtureB();
+//                Gdx.app.log("endContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+            }
+
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {
+            }
+
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {
+            }
+
+        });
 	}
 	
 	
