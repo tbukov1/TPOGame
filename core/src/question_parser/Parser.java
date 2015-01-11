@@ -2,6 +2,8 @@ package question_parser;
 
 
 
+
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
@@ -10,22 +12,17 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class Parser {
     	 
-	public static ArrayList<Question> getQuestion(String filepath, String category){
+	public ArrayList<Question> getQuestion(String filepath, String category){
 		
 
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			FileHandle fh = Gdx.files.internal(filepath);
-			Document document = builder.parse(fh.read());
+			Document document = builder.parse(ClassLoader.getSystemResourceAsStream(filepath));
 
 			NodeList nodeList = document.getDocumentElement().getChildNodes();
 		
@@ -63,14 +60,16 @@ public class Parser {
 								nodeListAnswers = tempnode.getChildNodes();
 								ArrayList<String> answers = new ArrayList<String>();
 
+								int trenutenAnswer = 1;
 								for(int j = 0; j < nodeListAnswers.getLength(); j++){
 									Node nodeAnswer = nodeListAnswers.item(j);
-
 									if(nodeAnswer instanceof Element){
+										
 										answers.add(nodeAnswer.getTextContent()); 
-										if(nodeAnswer.getAttributes() != null){
-											que.correctAnswer = i - 1;
+										if(nodeAnswer.getAttributes().getLength() != 0){
+											que.correctAnswer = trenutenAnswer;
 										}
+										trenutenAnswer += 1;
 									}
 								}
 								que.answers = answers;
