@@ -17,6 +17,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -46,7 +47,7 @@ public class GameStages extends Stage implements InputProcessor {
 	private CustomContactListener listener;
 	TPOGame2 game;	
 	
-	float startX = 600;
+	float startX = 600; 
 	float startY = 500;
 
 	float timeStep = 1 / 60f;
@@ -243,6 +244,33 @@ public class GameStages extends Stage implements InputProcessor {
 	}
 
 	private int processInput() {
+		Vector3 touchPos;
+		
+		touchPos = new Vector3();
+		
+		int deviceWidth = Gdx.graphics.getWidth();
+   	    int deviceHeight = Gdx.graphics.getHeight();
+
+		
+		if (Gdx.input.isTouched()) {
+	         touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0); //when the screen is touched, the coordinates are inserted into the vector
+	         if(touchPos.x > 0 && touchPos.x < 100){
+	        	 player.move(1);
+	        	 return 1;
+	         }
+	         if(touchPos.x > deviceWidth - 100 && touchPos.x < deviceWidth){
+	        	 player.move(3);
+	        	 return 3;
+	         }
+	         if(touchPos.x > 100 && touchPos.x < deviceWidth - 100 && touchPos.y > 0 && touchPos.y < 100){
+	        	 player.move(2);
+	        	 return 2;
+	         }
+	         if(touchPos.x > 100 && touchPos.x < deviceWidth - 100 && touchPos.y > deviceHeight - 100 && touchPos.y < deviceHeight){
+	        	 player.move(0);
+	        	 return 0;
+	         }
+		}
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			player.move(1);
 			return 1;
