@@ -53,10 +53,10 @@ public class FinalScreen implements Screen{
 		font1 = new BitmapFont(Gdx.files.internal("data/fonts/CustomFont.fnt"));
 		if(Gdx.graphics.getWidth()!= 800)
 			scale1 = 1.5f;	
-		font1.setScale(scale);
+		font1.setScale(scale1);
 		font1.setColor(1, 0.51f, 0.26f,1);
 		
-		buttons = new String[] { "Restart?", "Quit?" };
+		buttons = new String[] { "Ponovi?", "Izhod" };
 		buttonArray = new ArrayList<TextButton>();
 
 		Pixmap pixmap = new Pixmap(100, 100, Format.RGBA8888);
@@ -105,7 +105,7 @@ public class FinalScreen implements Screen{
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					// TODO Auto-generated method stub
-					if (tex.equals("Restart?")) {
+					if (tex.equals("Ponovi?")) {
 						System.out.println("Open game!");
 						game.fh.delete();
 						game.points = 0;
@@ -114,7 +114,7 @@ public class FinalScreen implements Screen{
 						game.setScreen(game.gameScreen);
 						Gdx.input.setInputProcessor(null);
 					}
-					if (tex.equals("Quit?")) {
+					if (tex.equals("Izhod")) {
 						System.out.println("Close game!");
 						game.fh.delete();
 						Gdx.app.exit();
@@ -128,15 +128,15 @@ public class FinalScreen implements Screen{
 	public void render(float delta) {
 		// TODO Auto-generated method stub
 
-		float w = font.getBounds("You won!").width / 2;
-		String text = "Your score is "+game.points+" points!";
-		float w2 = font.getBounds(text).width / 2;
-		float h = font.getBounds("You won!").height;
+		float w = font.getBounds("Zmagali ste!").width / 2;
+		String text = "Dosegli ste "+game.points+" toèk!";
+		float w2 = font1.getBounds(text).width / 2;
+		float h = font.getBounds("Zmagali ste!").height;
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sb.begin();
-		font.drawMultiLine(sb, "You won!", Gdx.graphics.getWidth() / 2 - w,
+		font.drawMultiLine(sb, "Zmagali ste!", Gdx.graphics.getWidth() / 2 - w,
 				Gdx.graphics.getHeight() - (h));
 		font1.draw(sb, text, Gdx.graphics.getWidth() / 2 -w2, Gdx.graphics.getHeight() -(h*3));
 		sb.end();

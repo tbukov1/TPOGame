@@ -3,61 +3,185 @@
 <Classes>
   	<Class type="english">
   	    <Question number="1">
-  	        <Text type="question">This is a test question?</Text>
+  	        <Text type="question">One, two, three, ?</Text>
   	        <Answers type="answers">
-  	            <Answer type="correct">Yes it is.</Answer>
-  	            <Answer>This is Lama</Answer>
-  	            <Answer>Is this lame?</Answer>
-  	            <Answer>This is lame</Answer>
+  	            <Answer type="correct">Four?</Answer>
+  	            <Answer>Five?</Answer>
+  	            <Answer>Seven?</Answer>
   	        </Answers>  	        
   	    </Question>
+		
+		<Question number="2">
+  	        <Text type="question">Katera beseda ne pomeni "velik"?</Text>
+  	        <Answers type="answers">
+  	            <Answer type="correct">Generous.</Answer>
+  	            <Answer>Enormous.</Answer>
+  	            <Answer>Huge.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		<Question number="3">
+  	        <Text type="question">Sopomenka besedi "fear" je</Text>
+  	        <Answers type="answers">
+  	            <Answer type="correct">Dread.</Answer>
+  	            <Answer>Love.</Answer>
+  	            <Answer>Anticipation.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		<Question number="4">
+  	        <Text type="question">Katero ni žival?</Text>
+  	        <Answers type="answers">
+  	            <Answer type="correct">Tremor.</Answer>
+  	            <Answer>Mantis.</Answer>
+  	            <Answer>Hound.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		<Question number="5">
+  	        <Text type="question">Kaj ni sadje?</Text>
+  	        <Answers type="answers">
+  	            <Answer type="correct">Potato.</Answer>
+  	            <Answer>Apple.</Answer>
+  	            <Answer>Watermelon.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
   	</Class>
   	<Class type="math">
   	    <Question number="1">
-  	        <Text type="question">E=mc^2?</Text>
+  	        <Text type="question">Cigava ploscina je a*b?</Text>
   	        <Answers type="answers">
-  	            <Answer>Yes it is.</Answer>
-  	            <Answer>This is Lama</Answer>
-  	            <Answer>Is this lame?</Answer>
-  	            <Answer type="correct">This is lameCorrect</Answer>
+  	            <Answer>Kvadrat.</Answer>
+  	            <Answer>Trikotnik.</Answer>
+  	            <Answer type="correct">Pravokotnik.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		<Question number="2">
+  	        <Text type="question">Kvadratni koren od 121?</Text>
+  	        <Answers type="answers">
+  	            <Answer>12.</Answer>
+  	            <Answer>17.</Answer>
+  	            <Answer type="correct">11.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		<Question number="3">
+  	        <Text type="question">5+3-6/3*2?</Text>
+  	        <Answers type="answers">
+  	            <Answer>6.</Answer>
+  	            <Answer>2.</Answer>
+  	            <Answer type="correct">4.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		<Question number="4">
+  	        <Text type="question">1, 1, 2, 3, 5, 8, _ ?</Text>
+  	        <Answers type="answers">
+  	            <Answer>11.</Answer>
+  	            <Answer>12.</Answer>
+  	            <Answer type="correct">13.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		<Question number="5">
+  	        <Text type="question">Vsota kotov v trikotniku?</Text>
+  	        <Answers type="answers">
+  	            <Answer>360.</Answer>
+  	            <Answer>260.</Answer>
+  	            <Answer type="correct">180.</Answer>
   	        </Answers>  	        
   	    </Question>
   	</Class>
+	
+	
   	<Class type="chemistry">
   	    <Question number="1">
-  	        <Text type="question">Lolipop?</Text>
+  	        <Text type="question">Zapis za vodo je..?</Text>
   	        <Answers type="answers">
-  	            <Answer type="correct">Lolipop1?Correct</Answer>
-  	            <Answer>Lolipop2</Answer>
-  	            <Answer>Lolopop3</Answer>
+  	            <Answer type="correct">H2O.</Answer>
+  	            <Answer>O2.</Answer>
+				<Answer>H2SO4.</Answer>
   	        </Answers>  	        
   	    </Question>
+		
   	    <Question number="2">
-  	        <Text type="question">Cherry berry?</Text>
+  	        <Text type="question">Kislinski pH je..?</Text>
   	        <Answers type="answers">
-  	            <Answer>Cherry1</Answer>
-  	            <Answer>Cherry2</Answer>
-  	            <Answer type="correct">Cherry3?Correct</Answer>
-  	            <Answer>Cherry4</Answer>
+  	            <Answer>Enak 7.</Answer>
+  	            <Answer>Visji od 7.</Answer>
+  	            <Answer type="correct">Nizji od 7.</Answer>
   	        </Answers>  	        
   	    </Question>
+		
+		 <Question number="3">
+  	        <Text type="question">Kateri element sublimira?</Text>
+  	        <Answers type="answers">
+  	            <Answer>Magnezij.</Answer>
+  	            <Answer type="correct">Jod.</Answer>
+  	            <Answer>Klor.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		 <Question number="4">
+  	        <Text type="question">Elektroni imajo...?</Text>
+  	        <Answers type="answers">
+  	            <Answer>Pozitiven naboj.</Answer>
+  	            <Answer type="correct">Negativen naboj.</Answer>
+  	            <Answer>Nevtralen naboj.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
+		 <Question number="5">
+  	        <Text type="question">Kaj pomeni Au?</Text>
+  	        <Answers type="answers">
+  	            <Answer>Argon.</Answer>
+  	            <Answer>Aluminij.</Answer>
+  	            <Answer type="correct">Zlato.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		
 	</Class>
 	<Class type="history">
   	    <Question number="1">
-  	        <Text type="question">First president of USA?</Text>
+  	        <Text type="question">Prvi predsednik ZDA?</Text>
   	        <Answers type="answers">
-  	            <Answer type="correct">Benjamin Frankiln</Answer>
-  	            <Answer>Obama</Answer>
-  	            <Answer>Bush</Answer>
+  	            <Answer type="correct">George Washington</Answer>
+  	            <Answer>Benjamin Franklin</Answer>
+  	            <Answer>George Bush</Answer>
   	        </Answers>  	        
   	    </Question>
   	    <Question number="2">
-  	        <Text type="question">First metal age?</Text>
+  	        <Text type="question">Kdaj je bila fr. revolucija?</Text>
   	        <Answers type="answers">
-  	            <Answer>Bronze</Answer>
-  	            <Answer>Gold</Answer>
-  	            <Answer type="correct">Stone</Answer>
-  	            <Answer>Iron</Answer>
+  	            <Answer>1776.</Answer>
+  	            <Answer type="correct">1789.</Answer>
+  	            <Answer>1492.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		<Question number="3">
+  	        <Text type="question">Ameriko je odkril... ?</Text>
+  	        <Answers type="answers">
+  	            <Answer>Vasco Da Gama.</Answer>
+  	            <Answer type="correct">Kristof Kolumb.</Answer>
+  	            <Answer>Amerigo Vespucci.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		<Question number="4">
+  	        <Text type="question">Pretorjanec je... ?</Text>
+  	        <Answers type="answers">
+  	            <Answer>Politik.</Answer>
+  	            <Answer type="correct">Vojak.</Answer>
+  	            <Answer>Trgovec.</Answer>
+  	        </Answers>  	        
+  	    </Question>
+		<Question number="5">
+  	        <Text type="question">Kaj so egipcanske piramide?</Text>
+  	        <Answers type="answers">
+  	            <Answer>Spomeniki.</Answer>
+  	            <Answer type="correct">Grobnice</Answer>
+  	            <Answer>Svetisca.</Answer>
   	        </Answers>  	        
   	    </Question>
 	</Class>

@@ -38,7 +38,7 @@ public class MainMenu implements Screen {
 		cam.update();
 		skin = new Skin();
 //		buttons = new String[] { "Play", "Settings", "Quit" };
-		buttons = new String[] { "Play", "Quit" };
+		buttons = new String[] { "Zaèni", "Izhod" };
 		buttonArray = new ArrayList<TextButton>();
 
 		Pixmap pixmap = new Pixmap(100, 100, Format.RGBA8888);
@@ -100,13 +100,13 @@ public class MainMenu implements Screen {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					// TODO Auto-generated method stub
-					if (tex.equals("Play")) {
+					if (tex.equals("Zaèni")) {
 						System.out.println("Open game!");
 						game.setScreen(game.gameScreen);
 						Gdx.input.setInputProcessor(null);
 						cam = null;
 					}
-					if (tex.equals("Quit")) {
+					if (tex.equals("Izhod")) {
 						System.out.println("Close game!");
 						Gdx.app.exit();
 					}

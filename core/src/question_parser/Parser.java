@@ -77,7 +77,6 @@ public class Parser {
 									}
 								}
 								que.answers = answers;
-								
 								questions.add(que);
 							}
 						}
