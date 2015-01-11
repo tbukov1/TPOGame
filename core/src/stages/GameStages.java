@@ -79,7 +79,7 @@ public class GameStages extends Stage implements InputProcessor {
 		// world.createBody(groundDef);
 
 		this.game = game;
-		renderer = new Box2DDebugRenderer();
+//		renderer = new Box2DDebugRenderer();
 		Gdx.input.setInputProcessor(this);
 		
 		createPlayer("data/player/sprites_player_3.png",startX,startY);
@@ -243,7 +243,7 @@ public class GameStages extends Stage implements InputProcessor {
 				monster.render(sb);
 		}
 
-		renderer.render(world, camera.combined);
+//		renderer.render(world, camera.combined);
 		
 		
 		hudPoints.render(game.points);

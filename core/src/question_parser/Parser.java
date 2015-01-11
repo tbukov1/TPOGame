@@ -4,15 +4,18 @@ package question_parser;
 
 
 
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.ArrayList;
+
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import java.util.ArrayList;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 
 public class Parser {
     	 
@@ -22,7 +25,8 @@ public class Parser {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(ClassLoader.getSystemResourceAsStream(filepath));
+			FileHandle fh = Gdx.files.internal(filepath);
+			Document document = builder.parse(fh.read());
 
 			NodeList nodeList = document.getDocumentElement().getChildNodes();
 		

@@ -37,7 +37,8 @@ public class MainMenu implements Screen {
 		cam.translate(Constants.APP_WIDTH / 2, Constants.APP_HEIGHT / 2);
 		cam.update();
 		skin = new Skin();
-		buttons = new String[] { "Play", "Settings", "Quit" };
+//		buttons = new String[] { "Play", "Settings", "Quit" };
+		buttons = new String[] { "Play", "Quit" };
 		buttonArray = new ArrayList<TextButton>();
 
 		Pixmap pixmap = new Pixmap(100, 100, Format.RGBA8888);
@@ -49,8 +50,8 @@ public class MainMenu implements Screen {
 		pixmap.fill();
 
 		skin.add("blue", new Texture(pixmap));
-		BitmapFont font = new BitmapFont();
-		font.scale(0.9f);
+		BitmapFont font = new BitmapFont(Gdx.files.internal("data/fonts/CustomFont32.fnt"));
+		font.scale(Gdx.graphics.getWidth() != 800? 5f : 0.9f);
 		skin.add("default", font);
 
 		TextButtonStyle tBSyle = new TextButtonStyle();
@@ -67,8 +68,8 @@ public class MainMenu implements Screen {
 			TextButton tmp = new TextButton(buttons[i], tBSyle);
 			if (prev != null)
 				b += prev.getHeight();
-			tmp.setPosition(Constants.APP_WIDTH / 2 - tmp.getWidth() / 2,
-					Constants.APP_HEIGHT / 2 - b);
+			tmp.setPosition(Gdx.graphics.getWidth() / 2 - tmp.getWidth() / 2,
+					Gdx.graphics.getHeight() / 2 - b);
 			stage.addActor(tmp);
 			buttonArray.add(tmp);
 			prev = tmp;
@@ -109,9 +110,9 @@ public class MainMenu implements Screen {
 						System.out.println("Close game!");
 						Gdx.app.exit();
 					}
-					if(tex.equals("Settings")){
-						System.out.println("TODO Settings menu!");
-					}
+//					if(tex.equals("Settings")){
+//						System.out.println("TODO Settings menu!");
+//					}
 				}
 			});
 		}

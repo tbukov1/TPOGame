@@ -34,6 +34,8 @@ public class QuestionStage extends Stage implements InputProcessor {
 	public Question question;
 	public int index;
 	public float margin, offsetL, offsetT;
+
+	float scale = 0.6f;
 	TPOGame2 game;
 
 	private ArrayList<TextButton> buttonArray;
@@ -44,9 +46,13 @@ public class QuestionStage extends Stage implements InputProcessor {
 
 	public QuestionStage(TPOGame2 game) {
 		font = new BitmapFont(Gdx.files.internal("data/fonts/CustomFont.fnt"));
-		font.setScale(0.6f);
+		if(Gdx.graphics.getWidth()!= 800)
+			scale = 2f;
+		
+		
+		font.setScale(scale);
 		sb = new SpriteBatch();
-		margin = 20f;
+		margin = scale != 0.6f?70f: 20f;
 		offsetL = 70f;
 		offsetT = 30f;
 		this.game = game;
@@ -59,8 +65,8 @@ public class QuestionStage extends Stage implements InputProcessor {
 		float w = font.getBounds(question.getText()).width / 2;
 		float h = font.getBounds(question.getText()).height;
 		sb.begin();
-		font.drawMultiLine(sb, question.getText(), Constants.APP_WIDTH / 2 - w,
-				Constants.APP_HEIGHT - (h));
+		font.drawMultiLine(sb, question.getText(), Gdx.graphics.getWidth() / 2 - w,
+				Gdx.graphics.getHeight() - (h));
 		sb.end();
 	}
 
@@ -109,7 +115,7 @@ public class QuestionStage extends Stage implements InputProcessor {
 		skin.add("blue", new Texture(pixmap));
 		BitmapFont font = new BitmapFont(
 				Gdx.files.internal("data/fonts/CustomFont32.fnt"));
-		font.scale(0.1f);
+		font.scale(Gdx.graphics.getWidth() != 800?1.8f:0.1f);
 		skin.add("default", font);
 
 		TextButtonStyle tBSyle = new TextButtonStyle();
@@ -126,7 +132,7 @@ public class QuestionStage extends Stage implements InputProcessor {
 			TextButton tmp = new TextButton(question.getAnswers().get(i), tBSyle);
 			if (prev != null)
 				b += prev.getWidth() + margin;
-			tmp.setPosition(offsetL + b, Constants.APP_HEIGHT / 2 - offsetT);
+			tmp.setPosition(offsetL + b, Gdx.graphics.getHeight() / 2 - offsetT);
 			addActor(tmp);	
 			buttonArray.add(tmp);
 			prev = tmp;

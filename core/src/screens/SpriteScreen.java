@@ -23,6 +23,14 @@ public class SpriteScreen implements Screen{
 		this.game = game;
 		tex = new Texture(Gdx.files.internal(path));
 		s = new Image(tex);
+		float scaleX = 1, scaleY = 1;
+		if(Gdx.graphics.getWidth()!= 800)
+			scaleX = 2.4f;
+		if(Gdx.graphics.getHeight()!= 400)
+			scaleY = 2.7f;
+		
+		s.setScaleX(scaleX);
+		s.setScaleY(scaleY);
 		stage = new Stage();
 		
 	}
@@ -31,7 +39,7 @@ public class SpriteScreen implements Screen{
 		// TODO Auto-generated method stub
 		stage.addActor(s);
 		s.addAction(Actions.sequence(Actions.alpha(0)
-                ,Actions.fadeIn(0.5f),Actions.delay(2),Actions.run(new Runnable() {
+                ,Actions.fadeIn(0.5f),Actions.delay(30),Actions.run(new Runnable() {
      @Override
      public void run() {
          ((Game)Gdx.app.getApplicationListener()).setScreen(new SpriteScreen(game, "data/krajfar_splash.png"));
