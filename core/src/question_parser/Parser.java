@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class Parser {
     	 
-	public ArrayList<Question> getQuestion(String filepath, String category){
+	public static ArrayList<Question> getQuestion(String filepath, String category){
 		
 
 		try {
