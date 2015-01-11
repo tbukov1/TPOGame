@@ -36,11 +36,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import elements.Monster;
 import elements.MyMap;
 import elements.Player;
+import elements.Points;
 
 public class GameStages extends Stage implements InputProcessor {
 	private World world;
 	private ArrayList<Body> ground;
 	private ArrayList<Monster> monsters;
+	private Points hudPoints;
  	private SpriteBatch sb;
 	private BodyDef groundDef;
 	private MyMap map;
@@ -81,6 +83,8 @@ public class GameStages extends Stage implements InputProcessor {
 		Gdx.input.setInputProcessor(this);
 		
 		createPlayer("data/player/sprites_player_3.png",startX,startY);
+		
+		hudPoints = new Points(game.points);
 		
 		createMonsters();
 		
@@ -232,8 +236,7 @@ public class GameStages extends Stage implements InputProcessor {
 		//map.moveCamera(dir);
 		Camera.getCamera().update();
 		
-		
-		map.render();
+		map.render();		
 		player.render(sb);
 		for (Monster monster : monsters) {
 			if(!monster.question.answered)
@@ -241,6 +244,10 @@ public class GameStages extends Stage implements InputProcessor {
 		}
 
 		renderer.render(world, camera.combined);
+		
+		
+		hudPoints.render(game.points);
+
 	}
 
 	private int processInput() {
