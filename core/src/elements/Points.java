@@ -24,11 +24,11 @@ public class Points {
 	}
 	
 	public void render(int points){
-		float w = font.getBounds(Integer.toString(points)).width / 2;
-		float h = font.getBounds(Integer.toString(points)).height;
+		float w = font.getBounds(Integer.toString(points)+"p").width / 2;
+		float h = font.getBounds(Integer.toString(points)+"p").height;
 		changePoints(points);
 		sb.begin();
-		font.drawMultiLine(sb, Integer.toString(points), Gdx.graphics.getWidth() / 2 - w,
+		font.drawMultiLine(sb, Integer.toString(points)+"p", Gdx.graphics.getWidth() / 2 - w,
 			Gdx.graphics.getHeight() - (h));
 		sb.end();
 	}

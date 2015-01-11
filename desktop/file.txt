@@ -1,2 +1,0 @@
-points:2250
-stage:0

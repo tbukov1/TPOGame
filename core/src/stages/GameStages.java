@@ -177,7 +177,8 @@ public class GameStages extends Stage implements InputProcessor {
 		if (canLeave){
 			canLeave = false;
 			if(currentStage == Constants.CAVE){
-				game.gameScreen.setStage(Constants.DESERT);
+				game.setScreen(game.finalScreen);
+//				game.gameScreen.setStage(Constants.DESERT);
 			}else {
 				game.gameScreen.setStage(currentStage+1);
 			}			

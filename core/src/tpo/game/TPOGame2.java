@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import question_parser.Parser;
 import question_parser.Question;
+import screens.FinalScreen;
 import screens.GameScreen;
 import screens.MainMenu;
 import screens.SpriteScreen;
@@ -19,6 +20,7 @@ public class TPOGame2 extends Game {
 	public MainMenu mainMenuScreen;
 	public GameScreen gameScreen;
 	SpriteScreen spriteScreen;
+	public FinalScreen finalScreen;
 	public int state, stage;
 	public int points;
 	public FileHandle fh;	
@@ -51,11 +53,13 @@ public class TPOGame2 extends Game {
 		mainMenuScreen = new MainMenu(this);
 		gameScreen = new GameScreen(this);
 		spriteScreen = new SpriteScreen(this, "data/krajfar_splash.png");
+		finalScreen = new FinalScreen(this);
 		//preber v vrednosti gamePoints pa stage iz datoteke
 
 //		setScreen(mainMenuScreen);
 //		setScreen(gameScreen);
 		setScreen(spriteScreen);
+//		setScreen(finalScreen);
 	}
 
 }
