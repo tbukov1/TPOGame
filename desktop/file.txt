@@ -1,2 +1,2 @@
-points:2750
-stage:0
+points:9000
+stage:3

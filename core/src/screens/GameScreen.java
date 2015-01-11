@@ -24,6 +24,7 @@ public class GameScreen implements Screen{
 	boolean qStageFirst;
 	boolean gameStageFirst;
 	Random naklj;
+	public Question fromMonster;
 	
 	public GameScreen(TPOGame2 game){
 		this.game = game;
@@ -39,6 +40,10 @@ public class GameScreen implements Screen{
 		gameStageFirst = true;
 		
 		setStage(game.stage);
+	}
+	
+	public GameStages getStage(){
+		return stage;
 	}
 	
 	public void setStage(int i){
@@ -77,15 +82,21 @@ public class GameScreen implements Screen{
 				//se ne bo rabil ke bo narjen collison 
 				//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				Question tmp = null;
-				int index = 0;
-				do{
-					if(index > game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).size()){
-						tmp = null;
-						break;
-					}
-					tmp= game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).get(naklj.nextInt(game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).size()));
-					index++;
-				}while(tmp.answered);
+				if(fromMonster == null){
+				
+					int index = 0;
+					do{
+						if(index > game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).size()){
+							tmp = null;
+							break;
+						}
+						tmp= game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).get(naklj.nextInt(game.questions.get(Constants.SUBJECT_QUESTION[game.stage]).size()));
+						index++;
+					}while(tmp.answered);
+				
+				}else{
+					tmp = fromMonster;
+				}
 				//------------------------------------------------------------------------------------
 				qStage = new QuestionStage(game);
 				qStage.setQuestion(tmp);
@@ -97,6 +108,7 @@ public class GameScreen implements Screen{
 				}
 			qStage.draw();
 			qStage.act(delta);
+			fromMonster = null;
 		}
 	}
 

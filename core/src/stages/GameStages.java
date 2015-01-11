@@ -6,6 +6,7 @@ import java.util.Random;
 import tpo.game.TPOGame2;
 import utils.Camera;
 import utils.Constants;
+import utils.CustomContactListener;
 import utils.GameStates;
 import utils.MapBodyManager;
 import utils.WorldUtils;
@@ -42,6 +43,7 @@ public class GameStages extends Stage implements InputProcessor {
  	private SpriteBatch sb;
 	private BodyDef groundDef;
 	private MyMap map;
+	private CustomContactListener listener;
 	TPOGame2 game;	
 	
 	float startX = 600;
@@ -64,7 +66,8 @@ public class GameStages extends Stage implements InputProcessor {
 		this.subject = subject;
 		sb = new SpriteBatch();
 		world = WorldUtils.createWorld();
-		setContactListener();
+		listener = new CustomContactListener(game, this);
+		world.setContactListener(listener);
 		mbm = new MapBodyManager(world, 1, new FileHandle(
 				"data/map/materials.json"), 0);
 		currentStage = curStage;
@@ -81,6 +84,14 @@ public class GameStages extends Stage implements InputProcessor {
 		createMonsters();
 		
 		canLeave = false;
+	}
+	
+	public ArrayList<Monster> getMonsters(){
+		return monsters;
+	}
+	
+	public World getWorld(){
+		return world;
 	}
 
 	public void createMonsters(){
@@ -103,41 +114,6 @@ public class GameStages extends Stage implements InputProcessor {
 		}
 	}
 	
-	private void setContactListener(){
-		world.setContactListener(new ContactListener() 
-		 {
-
-            @Override
-            public void beginContact(Contact contact) {
-            	Fixture fixtureA = contact.getFixtureA();
-                Fixture fixtureB = contact.getFixtureB();
-                if (fixtureA.getUserData() != null && fixtureB.getUserData() != null){
-	                if(fixtureA.getUserData().equals("player") || fixtureB.getUserData().equals("player") ){
-	                	if(((String)fixtureA.getUserData()).startsWith("monster") || ((String)fixtureB.getUserData()).startsWith("monster")){
-	                		System.out.println("contact");
-	                	}
-	                }
-                }  
-                //Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
-            }
-
-            @Override
-            public void endContact(Contact contact) {
-//                Fixture fixtureA = contact.getFixtureA();
-//                Fixture fixtureB = contact.getFixtureB();
-//                Gdx.app.log("endContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
-            }
-
-            @Override
-            public void preSolve(Contact contact, Manifold oldManifold) {
-            }
-
-            @Override
-            public void postSolve(Contact contact, ContactImpulse impulse) {
-            }
-
-        });
-	}
 	
 	
 	private void setupCamera(float x, float y) {
@@ -158,6 +134,10 @@ public class GameStages extends Stage implements InputProcessor {
 			world.step(timeStep, 6, 2);
 			accumulator -= timeStep;
 		}
+		
+		/*for(Body b : listener.getBodiesToRemove()){
+			world.destroyBody(b);
+		}*/
 		player.update(delta);
 		float x, y;
 		x = Math.max(player.getPosition().x, 400);
@@ -165,7 +145,12 @@ public class GameStages extends Stage implements InputProcessor {
 		y = Math.max(player.getPosition().y, 200);
 		y = Math.min(y, 824);
 		
-		
+		canLeave = true;
+		for(Monster m : monsters){
+			if (m.question.answered == false) {
+				canLeave = false;
+			}
+		}
 		camera.position.set(x, y, 0f);
 		//pogledam èe je na portu
 		if((player.getPosition().x > Constants.PORT_LOCATIONS[currentStage].x -15) &&
@@ -178,7 +163,7 @@ public class GameStages extends Stage implements InputProcessor {
 			}
 			
 		}
-		canLeave = true;
+		
 //		System.out.println("x: "+player.getPosition().x + " y:" + player.getPosition().y);
 	}
 	

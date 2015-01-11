@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 public class Monster {
 	private TextureRegion tr;
 	public Question question;
-	Body body;
+	public Body body;
 	float width, height, scaleX,scaleY;
 	
 	public Monster(Body body, String path, Question question, float scaleX, float scaleY){

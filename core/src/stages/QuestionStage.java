@@ -79,11 +79,11 @@ public class QuestionStage extends Stage implements InputProcessor {
 						}
 						question.answered = true;
 						System.out.println(game.points);
-						}
+					}
 					else{//ne pršteješ polnih toèk
 						System.out.println("NIMAŠ POJMA!!!");
 						question.attempt++;
-						}
+					}
 					//TODO dodaš zaslon da prkaže al si odgovoru prou ali narobe
 					game.state = GameStates.GAME;
 				}
