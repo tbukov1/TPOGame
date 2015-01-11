@@ -60,7 +60,7 @@ public class Parser {
 								nodeListAnswers = tempnode.getChildNodes();
 								ArrayList<String> answers = new ArrayList<String>();
 
-								int trenutenAnswer = 1;
+								int trenutenAnswer = 0;
 								for(int j = 0; j < nodeListAnswers.getLength(); j++){
 									Node nodeAnswer = nodeListAnswers.item(j);
 									if(nodeAnswer instanceof Element){
